@@ -3,11 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node build.mjs",
+    "build": "node scripts/build.mjs",
     "test": "npm run build && npm run test:legacy && npm run test:design",
-    "test:legacy": "node test.mjs",
-    "test:design": "node v2/render.mjs",
-    "validate": "node validate.mjs"
+    "test:legacy": "node tests/legacy.mjs",
+    "test:design": "node tests/design.mjs",
+    "validate": "node src/validate.mjs"
   },
   "dependencies": {
     "ajv": "8.20.0",

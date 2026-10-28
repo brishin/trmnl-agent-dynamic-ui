@@ -23,7 +23,10 @@
     "focus",
     "dispatch"
   ],
-  "current_sample": "v2/01-editorial.json",
+  "current_sample": {
+    "gallery": "examples/v2/gallery.json",
+    "key": "01-editorial"
+  },
   "device_id": 73063,
   "playlist_item_id": 884318,
   "previous_weather_item_id": 884208,

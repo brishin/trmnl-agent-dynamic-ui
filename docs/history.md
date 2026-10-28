@@ -7,4 +7,4 @@ This repository was initialized after the plugin was built. Its first four commi
 3. Readable design system: shared tokens, 16px floor, heavier small text, removed v2 footer and computed-style checks.
 4. Inline MCP contract: generated schema/design/update guidance embedded in a non-rendering Liquid comment; repository documentation and reproducible build entry points.
 
-Generated output is ignored. `npm ci` then `npm test` builds and verifies the current source. See `DESIGN-SYSTEM.md` for the rules and `README.md` for the MCP workflow.
+Generated output is ignored. `npm ci` then `npm test` builds and verifies the current source. See `docs/design-system.md` for the rules and `README.md` for the MCP workflow.

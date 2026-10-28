@@ -4,13 +4,7 @@
   {% if block.width == 'full' %}{% assign odd = slots | modulo: 2 %}{% assign slots = slots | plus: odd | plus: 2 %}{% else %}{% assign slots = slots | plus: 1 %}{% endif %}
 {% endfor %}
 <style>
-/* Shared readability tokens. Generated from design-system.json. */
-.dui,.agent-screen,.agent-footer {
- --ui-text-min:16px; --ui-meta-size:16px; --ui-meta-weight:700; --ui-meta-leading:22px;
- --ui-body-size:18px; --ui-body-weight:400; --ui-body-leading:26px;
- --ui-section-size:18px; --ui-section-weight:700; --ui-section-leading:24px;
- --ui-ink:#000000; --ui-paper:#ffffff; --ui-space:4px;
-}
+/* DESIGN_TOKENS */
 
 .agent-screen,.agent-screen *,.agent-footer,.agent-footer * { font-family: "Inter Variable", sans-serif !important; }
 .agent-screen { font-family: "Inter Variable", sans-serif; gap: 14px !important; align-items: stretch !important; justify-content: flex-start !important; }

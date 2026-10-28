@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import Ajv from 'ajv';
-const check=new Ajv({allErrors:true}).compile(JSON.parse(fs.readFileSync(new URL('screen.schema.json',import.meta.url))));
+const check=new Ajv({allErrors:true}).compile(JSON.parse(fs.readFileSync(new URL('schemas/v2.json',import.meta.url))));
 export const shapes={editorial:['brief','metric','list'],spotlight:['metric','brief','agenda'],timeline:['agenda','list'],scoreboard:['metric','metric','metric','metric','brief'],focus:['brief','list'],dispatch:['brief','table','agenda']};
 export function validate(p){
  if(!check(p))throw Error(JSON.stringify(check.errors));
