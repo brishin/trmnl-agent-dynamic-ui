@@ -1,0 +1,29 @@
+{
+  "source": "Weather Glance plugin WMO lookup; shade is the framework bg--gray step, darker means more severe",
+  "icon_url": "https://trmnl.com/images/plugins/weather/wi-{icon}.svg",
+  "conditions": {
+    "clear": {"icon": "day-sunny", "shade": 70, "wmo": [0]},
+    "mostly-clear": {"icon": "day-sunny-overcast", "shade": 65, "wmo": [1]},
+    "partly-cloudy": {"icon": "day-cloudy", "shade": 65, "wmo": [2]},
+    "cloudy": {"icon": "cloudy", "shade": 65, "wmo": [3]},
+    "fog": {"icon": "fog", "shade": 60, "wmo": [45, 48]},
+    "drizzle": {"icon": "day-showers", "shade": 60, "wmo": [51, 80]},
+    "showers": {"icon": "showers", "shade": 45, "wmo": [53, 81]},
+    "heavy-showers": {"icon": "showers", "shade": 30, "wmo": [55, 82]},
+    "freezing-drizzle": {"icon": "day-sleet", "shade": 60, "wmo": [56, 85]},
+    "sleet": {"icon": "sleet", "shade": 30, "wmo": [57, 86]},
+    "light-rain": {"icon": "day-rain", "shade": 60, "wmo": [61]},
+    "rain": {"icon": "rain", "shade": 45, "wmo": [63]},
+    "heavy-rain": {"icon": "rain", "shade": 30, "wmo": [65]},
+    "freezing-rain": {"icon": "day-rain-mix", "shade": 60, "wmo": [66]},
+    "heavy-freezing-rain": {"icon": "rain-mix", "shade": 30, "wmo": [67]},
+    "light-snow": {"icon": "snow", "shade": 60, "wmo": [71]},
+    "snow": {"icon": "snow", "shade": 45, "wmo": [73]},
+    "heavy-snow": {"icon": "snow", "shade": 30, "wmo": [75, 77]},
+    "thunderstorm": {"icon": "thunderstorm", "shade": 15, "wmo": [95]},
+    "hail": {"icon": "hail", "shade": 30, "wmo": [96]},
+    "severe-hail": {"icon": "hail", "shade": 15, "wmo": [99]},
+    "unknown": {"icon": "na", "shade": 75, "wmo": []}
+  },
+  "range_levels": [70, 60, 45, 15]
+}

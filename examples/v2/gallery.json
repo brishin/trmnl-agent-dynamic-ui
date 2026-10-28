@@ -395,5 +395,217 @@
         ]
       }
     ]
+  },
+  "10-outlook": {
+    "schema_version": 2,
+    "layout": "outlook",
+    "heading": "The week outside",
+    "updated_at": "TUE 27 OCT · 7:10 AM · SAMPLE",
+    "blocks": [
+      {
+        "type": "forecast",
+        "title": "Seven days at home",
+        "unit": "°F",
+        "mode": "range",
+        "now": {
+          "temp": 51,
+          "label": "7:10 AM",
+          "trend": "rising"
+        },
+        "periods": [
+          {
+            "label": "Tue 27",
+            "condition": "partly-cloudy",
+            "low": 48,
+            "high": 63
+          },
+          {
+            "label": "Wed 28",
+            "condition": "showers",
+            "low": 52,
+            "high": 60
+          },
+          {
+            "label": "Thu 29",
+            "condition": "thunderstorm",
+            "low": 55,
+            "high": 66
+          },
+          {
+            "label": "Fri 30",
+            "condition": "rain",
+            "low": 50,
+            "high": 58
+          },
+          {
+            "label": "Sat 31",
+            "condition": "mostly-clear",
+            "low": 44,
+            "high": 61
+          },
+          {
+            "label": "Sun 1",
+            "condition": "clear",
+            "low": 41,
+            "high": 64
+          },
+          {
+            "label": "Mon 2",
+            "condition": "fog",
+            "low": 43,
+            "high": 57
+          }
+        ]
+      },
+      {
+        "type": "brief",
+        "title": "Umbrella Thursday.",
+        "text": "Storms build after lunch on Thursday. The weekend dries out and turns crisp; Sunday is the best day to be outside."
+      }
+    ]
+  },
+  "11-trend": {
+    "schema_version": 2,
+    "layout": "trend",
+    "heading": "Resting heart rate",
+    "updated_at": "TUE 27 OCT · 6:30 AM · SAMPLE",
+    "blocks": [
+      {
+        "type": "range",
+        "title": "Overnight range, last six nights",
+        "unit": "bpm",
+        "now": {
+          "value": 54,
+          "label": "6:30 AM",
+          "trend": "falling"
+        },
+        "bars": [
+          {
+            "label": "Wed",
+            "low": 52,
+            "high": 61,
+            "level": 0
+          },
+          {
+            "label": "Thu",
+            "low": 55,
+            "high": 68,
+            "level": 2
+          },
+          {
+            "label": "Fri",
+            "low": 58,
+            "high": 74,
+            "level": 3
+          },
+          {
+            "label": "Sat",
+            "low": 56,
+            "high": 66,
+            "level": 1
+          },
+          {
+            "label": "Sun",
+            "low": 53,
+            "high": 60,
+            "level": 0
+          },
+          {
+            "label": "Mon",
+            "low": 51,
+            "high": 59,
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "brief",
+        "title": "Back to baseline.",
+        "text": "The late Friday spike has faded. Two quiet nights in a row put this morning at the low end of your usual range."
+      }
+    ]
+  },
+  "12-board": {
+    "schema_version": 2,
+    "layout": "board",
+    "heading": "Who has what",
+    "updated_at": "TUE 27 OCT · 7:30 AM · SAMPLE",
+    "blocks": [
+      {
+        "type": "columns",
+        "title": "Tuesday, three ways",
+        "columns": [
+          {
+            "label": "Maya",
+            "content": [
+              {
+                "kind": "badge",
+                "text": "Late start"
+              },
+              {
+                "kind": "event",
+                "time": "9:40",
+                "text": "School drop-off"
+              },
+              {
+                "kind": "event",
+                "time": "3:15",
+                "text": "Piano with Ms. Ortiz"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  "Sign field-trip form",
+                  "Library books"
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Leo",
+            "highlight": true,
+            "content": [
+              {
+                "kind": "event",
+                "time": "8:05",
+                "text": "Bus at the corner"
+              },
+              {
+                "kind": "event",
+                "time": "4:15",
+                "text": "Swim, bring goggles",
+                "icon": "showers"
+              },
+              {
+                "kind": "metric",
+                "value": "3",
+                "text": "Spelling words left"
+              }
+            ]
+          },
+          {
+            "label": "Errands",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Pharmacy pickup before 6"
+              },
+              {
+                "kind": "text",
+                "text": "Return the drill to Dana"
+              },
+              {
+                "kind": "list",
+                "items": [
+                  "Milk",
+                  "Coffee filters",
+                  "Batteries (AA)"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 }

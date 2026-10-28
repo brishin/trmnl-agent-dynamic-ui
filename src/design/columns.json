@@ -1,0 +1,11 @@
+{
+  "source": "Fit budgets for columns blocks, derived from the renderer's day-column CSS on the 732px content row; tests/design.mjs stress cases fill each column count to these limits",
+  "count": {"min": 2, "max": 8},
+  "parts_max": 6,
+  "row_px": 732,
+  "column_inset_px": 21,
+  "glyph_px": {"body": 11, "label": 14, "value": 24, "metric": 18, "badge": 13},
+  "icon_px": {"inline": 28, "value": 32},
+  "height_px": {"weekahead": 205, "board": 305},
+  "cost_px": {"line": 21, "part": 9, "label": 26, "value": 42, "metric_value": 31, "badge": 33, "bar": 16}
+}

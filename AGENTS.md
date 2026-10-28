@@ -4,17 +4,17 @@ Private TRMNL plugin; see `README.md` for commands and `docs/design-system.md` f
 
 ## Source and output
 
-- `src/templates/`: v1 grid and nine v2 compositions; prefer schema v2.
+- `src/templates/`: v1 grid and twelve v2 compositions; prefer schema v2.
 - `src/schemas/`, `src/validate*.mjs`: payload contracts and composition checks.
-- `src/design/tokens.json`: shared typography and spacing.
+- `src/design/tokens.json`: shared typography, spacing and ink; `src/design/weather.json`: weather conditions, icons and shades; `src/design/columns.json`: column fit budgets.
 - `src/contract.liquid`: compact AI-facing contract; preserve its build placeholders.
 - `examples/`, `tests/`, `docs/`: canonical samples, browser checks, documentation.
 - Edit source; `npm run build` generates `dist/`. Tests write `artifacts/`. Both are ignored; never commit generated output or dependencies.
-- Keep pinned `vendor/trmnl/` assets and their documented checksums consistent.
+- Keep pinned `vendor/trmnl/` and `vendor/weather-icons/` assets and their documented checksums consistent.
 
 ## Design and verification
 
-- Text >=16 CSS px; text at 16px requires weight >=600. No auto-shrinking, gray small text, or v2 decorative footer.
+- Text >=16 CSS px; text at 16px requires weight >=600. Text is black or white; gray is for chart fills only. No auto-shrinking or v2 decorative footer.
 - Use whitespace, rules, and hierarchy; keep block order compatible with the selected composition. Strings are escaped content, never executable HTML/Liquid.
 - `npm ci`; run `npm test` after renderer, schema, token, build, or check changes. Browser checks require Chrome at the path in `tests/*.mjs`. Documentation-only changes need a diff check.
 - Validate content with `npm run validate -- payload.json`. Use authorized facts and honest timestamps; included examples are fictional.

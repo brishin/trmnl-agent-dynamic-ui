@@ -24,7 +24,10 @@
     "dispatch",
     "almanac",
     "weekahead",
-    "countdown"
+    "countdown",
+    "outlook",
+    "trend",
+    "board"
   ],
   "current_sample": {
     "gallery": "examples/v2/gallery.json",

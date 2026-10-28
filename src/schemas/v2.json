@@ -49,6 +49,9 @@
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 180
+              },
+              "icon": {
+                "$ref": "#/definitions/condition"
               }
             },
             "required": [
@@ -90,6 +93,9 @@
                 "type": "string",
                 "minLength": 1,
                 "maxLength": 64
+              },
+              "icon": {
+                "$ref": "#/definitions/condition"
               }
             },
             "required": [
@@ -128,9 +134,31 @@
                 "minItems": 1,
                 "maxItems": 3,
                 "items": {
-                  "type": "string",
-                  "minLength": 1,
-                  "maxLength": 48
+                  "oneOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 48
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 48
+                        },
+                        "icon": {
+                          "$ref": "#/definitions/condition"
+                        }
+                      },
+                      "required": [
+                        "text",
+                        "icon"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
                 }
               }
             },
@@ -180,6 +208,9 @@
                       "type": "string",
                       "minLength": 1,
                       "maxLength": 38
+                    },
+                    "icon": {
+                      "$ref": "#/definitions/condition"
                     }
                   },
                   "required": [
@@ -307,6 +338,9 @@
                       "type": "string",
                       "minLength": 1,
                       "maxLength": 12
+                    },
+                    "icon": {
+                      "$ref": "#/definitions/condition"
                     }
                   },
                   "required": [
@@ -375,6 +409,9 @@
                         "minLength": 1,
                         "maxLength": 18
                       }
+                    },
+                    "icon": {
+                      "$ref": "#/definitions/condition"
                     }
                   },
                   "required": [
@@ -389,6 +426,221 @@
               "type",
               "title",
               "days"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "columns"
+              },
+              "width": {
+                "enum": [
+                  "half",
+                  "full"
+                ]
+              },
+              "emphasis": {
+                "enum": [
+                  "normal",
+                  "important"
+                ]
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 32
+              },
+              "unit": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4
+              },
+              "columns": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 8,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 12
+                    },
+                    "value": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4
+                    },
+                    "icon": {
+                      "$ref": "#/definitions/condition"
+                    },
+                    "highlight": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "type": "array",
+                      "maxItems": 6,
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "text"
+                              },
+                              "text": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 60
+                              },
+                              "icon": {
+                                "$ref": "#/definitions/condition"
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "text"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "event"
+                              },
+                              "time": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 8
+                              },
+                              "text": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 48
+                              },
+                              "icon": {
+                                "$ref": "#/definitions/condition"
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "time",
+                              "text"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "metric"
+                              },
+                              "value": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 5
+                              },
+                              "text": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 24
+                              },
+                              "icon": {
+                                "$ref": "#/definitions/condition"
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "value",
+                              "text"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "list"
+                              },
+                              "items": {
+                                "type": "array",
+                                "minItems": 1,
+                                "maxItems": 3,
+                                "items": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 24
+                                }
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "items"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "badge"
+                              },
+                              "text": {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 12
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "text"
+                            ],
+                            "additionalProperties": false
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "kind": {
+                                "const": "range"
+                              },
+                              "low": {
+                                "$ref": "#/definitions/number"
+                              },
+                              "high": {
+                                "$ref": "#/definitions/number"
+                              },
+                              "level": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 3
+                              }
+                            },
+                            "required": [
+                              "kind",
+                              "low",
+                              "high"
+                            ],
+                            "additionalProperties": false
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "required": [
+                    "label"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "type",
+              "title",
+              "columns"
             ],
             "additionalProperties": false
           },
@@ -448,6 +700,189 @@
               "days_in_month"
             ],
             "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "forecast"
+              },
+              "width": {
+                "enum": [
+                  "half",
+                  "full"
+                ]
+              },
+              "emphasis": {
+                "enum": [
+                  "normal",
+                  "important"
+                ]
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 32
+              },
+              "unit": {
+                "enum": [
+                  "°F",
+                  "°C"
+                ]
+              },
+              "mode": {
+                "enum": [
+                  "range",
+                  "point"
+                ]
+              },
+              "now": {
+                "type": "object",
+                "properties": {
+                  "temp": {
+                    "$ref": "#/definitions/number"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 10
+                  },
+                  "trend": {
+                    "$ref": "#/definitions/trend"
+                  }
+                },
+                "required": [
+                  "temp"
+                ],
+                "additionalProperties": false
+              },
+              "periods": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 7,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 6
+                    },
+                    "condition": {
+                      "$ref": "#/definitions/condition"
+                    },
+                    "low": {
+                      "$ref": "#/definitions/number"
+                    },
+                    "high": {
+                      "$ref": "#/definitions/number"
+                    }
+                  },
+                  "required": [
+                    "label",
+                    "condition",
+                    "low"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "type",
+              "title",
+              "unit",
+              "mode",
+              "periods"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "range"
+              },
+              "width": {
+                "enum": [
+                  "half",
+                  "full"
+                ]
+              },
+              "emphasis": {
+                "enum": [
+                  "normal",
+                  "important"
+                ]
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 32
+              },
+              "unit": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4
+              },
+              "now": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "$ref": "#/definitions/number"
+                  },
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 10
+                  },
+                  "trend": {
+                    "$ref": "#/definitions/trend"
+                  }
+                },
+                "required": [
+                  "value"
+                ],
+                "additionalProperties": false
+              },
+              "bars": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 7,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 6
+                    },
+                    "low": {
+                      "$ref": "#/definitions/number"
+                    },
+                    "high": {
+                      "$ref": "#/definitions/number"
+                    },
+                    "level": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 3
+                    }
+                  },
+                  "required": [
+                    "label",
+                    "low",
+                    "high"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "required": [
+              "type",
+              "title",
+              "bars"
+            ],
+            "additionalProperties": false
           }
         ]
       }
@@ -462,7 +897,10 @@
         "dispatch",
         "almanac",
         "weekahead",
-        "countdown"
+        "countdown",
+        "outlook",
+        "trend",
+        "board"
       ]
     }
   },
@@ -473,5 +911,45 @@
     "blocks",
     "layout"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "definitions": {
+    "condition": {
+      "enum": [
+        "clear",
+        "mostly-clear",
+        "partly-cloudy",
+        "cloudy",
+        "fog",
+        "drizzle",
+        "showers",
+        "heavy-showers",
+        "freezing-drizzle",
+        "sleet",
+        "light-rain",
+        "rain",
+        "heavy-rain",
+        "freezing-rain",
+        "heavy-freezing-rain",
+        "light-snow",
+        "snow",
+        "heavy-snow",
+        "thunderstorm",
+        "hail",
+        "severe-hail",
+        "unknown"
+      ]
+    },
+    "number": {
+      "type": "number",
+      "minimum": -999,
+      "maximum": 9999
+    },
+    "trend": {
+      "enum": [
+        "rising",
+        "falling",
+        "steady"
+      ]
+    }
+  }
 }

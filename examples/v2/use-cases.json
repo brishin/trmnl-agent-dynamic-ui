@@ -465,5 +465,452 @@
         "text": "School is closed for Election Day; Grandma has them 9 to 3. Picture-day forms are signed and in Leo’s backpack."
       }
     ]
+  },
+  "uc-13-hourly-outlook": {
+    "schema_version": 2,
+    "layout": "outlook",
+    "heading": "This afternoon",
+    "updated_at": "SAT 31 OCT · 11:20 AM · SAMPLE",
+    "blocks": [
+      {
+        "type": "forecast",
+        "title": "Every three hours",
+        "unit": "°C",
+        "mode": "point",
+        "now": {
+          "temp": 9,
+          "label": "11:20 AM",
+          "trend": "falling"
+        },
+        "periods": [
+          {
+            "label": "12 PM",
+            "condition": "cloudy",
+            "low": 9
+          },
+          {
+            "label": "3 PM",
+            "condition": "light-rain",
+            "low": 8
+          },
+          {
+            "label": "6 PM",
+            "condition": "rain",
+            "low": 6
+          },
+          {
+            "label": "9 PM",
+            "condition": "heavy-rain",
+            "low": 5
+          },
+          {
+            "label": "12 AM",
+            "condition": "sleet",
+            "low": 2
+          },
+          {
+            "label": "3 AM",
+            "condition": "light-snow",
+            "low": -1
+          },
+          {
+            "label": "6 AM",
+            "condition": "snow",
+            "low": -3
+          }
+        ]
+      },
+      {
+        "type": "brief",
+        "title": "Rain turns to snow.",
+        "text": "Trick-or-treat before six while it is only drizzling. After midnight it falls below freezing."
+      }
+    ]
+  },
+  "uc-14-saturday-plans": {
+    "schema_version": 2,
+    "layout": "timeline",
+    "heading": "Saturday, with weather",
+    "updated_at": "SAT 31 OCT · 7:45 AM · SAMPLE",
+    "blocks": [
+      {
+        "type": "agenda",
+        "title": "Outdoors today",
+        "items": [
+          {
+            "time": "9:00",
+            "icon": "drizzle",
+            "text": "Soccer · light drizzle"
+          },
+          {
+            "time": "1:00",
+            "icon": "cloudy",
+            "text": "Farmers market"
+          },
+          {
+            "time": "5:30",
+            "icon": "rain",
+            "text": "Trick-or-treat · rain likely"
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "title": "Pack for it",
+        "items": [
+          {
+            "text": "Rain shells for both kids",
+            "icon": "rain"
+          },
+          "Spare socks in the car",
+          {
+            "text": "Flashlights by the door",
+            "icon": "unknown"
+          }
+        ]
+      }
+    ]
+  },
+  "uc-15-week-weather": {
+    "schema_version": 2,
+    "layout": "weekahead",
+    "heading": "Week ahead",
+    "updated_at": "SUN 1 NOV · 6:00 PM · SAMPLE",
+    "blocks": [
+      {
+        "type": "week",
+        "title": "Plans and skies, Nov 2–8",
+        "days": [
+          {
+            "weekday": "MON",
+            "day": "2",
+            "icon": "fog",
+            "items": [
+              "Dentist 8:30"
+            ]
+          },
+          {
+            "weekday": "TUE",
+            "day": "3",
+            "icon": "clear",
+            "today": true,
+            "items": [
+              "Vote"
+            ]
+          },
+          {
+            "weekday": "WED",
+            "day": "4",
+            "icon": "showers",
+            "items": [
+              "Leo · swim 4:15"
+            ]
+          },
+          {
+            "weekday": "THU",
+            "day": "5",
+            "icon": "thunderstorm",
+            "items": [
+              "Picture day"
+            ]
+          },
+          {
+            "weekday": "FRI",
+            "day": "6",
+            "icon": "partly-cloudy"
+          },
+          {
+            "weekday": "SAT",
+            "day": "7",
+            "icon": "mostly-clear",
+            "items": [
+              "Hike, 9:00"
+            ]
+          },
+          {
+            "weekday": "SUN",
+            "day": "8",
+            "icon": "light-snow"
+          }
+        ]
+      },
+      {
+        "type": "brief",
+        "title": "Hike Saturday.",
+        "text": "Thursday storms may cancel recess; Saturday is the clearest morning of the week."
+      }
+    ]
+  },
+  "uc-16-power-prices": {
+    "schema_version": 2,
+    "layout": "trend",
+    "heading": "Electricity prices",
+    "updated_at": "TUE 27 OCT · 8:00 AM · SAMPLE",
+    "blocks": [
+      {
+        "type": "range",
+        "title": "Daily price band, ¢ per kWh",
+        "unit": "¢",
+        "now": {
+          "value": 14.2,
+          "label": "Right now",
+          "trend": "rising"
+        },
+        "bars": [
+          {
+            "label": "Tue",
+            "low": 9.1,
+            "high": 31.5,
+            "level": 3
+          },
+          {
+            "label": "Wed",
+            "low": 8.4,
+            "high": 22,
+            "level": 1
+          },
+          {
+            "label": "Thu",
+            "low": 7.9,
+            "high": 19.6,
+            "level": 0
+          },
+          {
+            "label": "Fri",
+            "low": 8.8,
+            "high": 24.3,
+            "level": 2
+          },
+          {
+            "label": "Sat",
+            "low": 6.5,
+            "high": 15.1,
+            "level": 0
+          }
+        ]
+      },
+      {
+        "type": "brief",
+        "title": "Run the dryer late.",
+        "text": "Today peaks above 30¢ at 6 PM. Overnight and Thursday stay cheapest for the car and laundry."
+      }
+    ]
+  },
+  "uc-17-school-week": {
+    "schema_version": 2,
+    "layout": "weekahead",
+    "heading": "School week",
+    "updated_at": "SUN 1 NOV · 6:00 PM · SAMPLE",
+    "blocks": [
+      {
+        "type": "columns",
+        "title": "Nov 2–6",
+        "columns": [
+          {
+            "label": "MON",
+            "value": "2",
+            "content": [
+              {
+                "kind": "event",
+                "time": "4:15",
+                "text": "Leo swim"
+              }
+            ]
+          },
+          {
+            "label": "TUE",
+            "value": "3",
+            "highlight": true,
+            "content": [
+              {
+                "kind": "badge",
+                "text": "Day off"
+              },
+              {
+                "kind": "text",
+                "text": "Vote first"
+              }
+            ]
+          },
+          {
+            "label": "WED",
+            "value": "4",
+            "icon": "showers",
+            "content": [
+              {
+                "kind": "event",
+                "time": "3:15",
+                "text": "Piano"
+              }
+            ]
+          },
+          {
+            "label": "THU",
+            "value": "5",
+            "content": [
+              {
+                "kind": "badge",
+                "text": "Photos"
+              },
+              {
+                "kind": "text",
+                "text": "Collared shirts"
+              }
+            ]
+          },
+          {
+            "label": "FRI",
+            "value": "6",
+            "content": [
+              {
+                "kind": "metric",
+                "value": "2",
+                "text": "Library books due"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "brief",
+        "title": "Tuesday is off.",
+        "text": "School is closed for the election, and Thursday is picture day."
+      }
+    ]
+  },
+  "uc-18-eight-day-temps": {
+    "schema_version": 2,
+    "layout": "board",
+    "heading": "Eight days out",
+    "updated_at": "SAT 31 OCT · 7:00 AM · SAMPLE",
+    "blocks": [
+      {
+        "type": "columns",
+        "title": "Highs and lows, °F",
+        "unit": "°",
+        "columns": [
+          {
+            "label": "SUN",
+            "value": "1",
+            "icon": "clear",
+            "highlight": true,
+            "content": [
+              {
+                "kind": "range",
+                "low": 44,
+                "high": 61,
+                "level": 0
+              },
+              {
+                "kind": "text",
+                "text": "Fall back"
+              }
+            ]
+          },
+          {
+            "label": "MON",
+            "value": "2",
+            "icon": "partly-cloudy",
+            "highlight": false,
+            "content": [
+              {
+                "kind": "range",
+                "low": 47,
+                "high": 63,
+                "level": 0
+              }
+            ]
+          },
+          {
+            "label": "TUE",
+            "value": "3",
+            "icon": "showers",
+            "highlight": false,
+            "content": [
+              {
+                "kind": "range",
+                "low": 49,
+                "high": 58,
+                "level": 1
+              }
+            ]
+          },
+          {
+            "label": "WED",
+            "value": "4",
+            "icon": "rain",
+            "highlight": false,
+            "content": [
+              {
+                "kind": "range",
+                "low": 46,
+                "high": 54,
+                "level": 2
+              }
+            ]
+          },
+          {
+            "label": "THU",
+            "value": "5",
+            "icon": "thunderstorm",
+            "highlight": false,
+            "content": [
+              {
+                "kind": "range",
+                "low": 45,
+                "high": 57,
+                "level": 3
+              },
+              {
+                "kind": "text",
+                "text": "Storms"
+              }
+            ]
+          },
+          {
+            "label": "FRI",
+            "value": "6",
+            "icon": "cloudy",
+            "highlight": false,
+            "content": [
+              {
+                "kind": "range",
+                "low": 41,
+                "high": 52,
+                "level": 1
+              }
+            ]
+          },
+          {
+            "label": "SAT",
+            "value": "7",
+            "icon": "mostly-clear",
+            "highlight": false,
+            "content": [
+              {
+                "kind": "range",
+                "low": 39,
+                "high": 55,
+                "level": 0
+              }
+            ]
+          },
+          {
+            "label": "SUN",
+            "value": "8",
+            "icon": "clear",
+            "highlight": false,
+            "content": [
+              {
+                "kind": "range",
+                "low": 40,
+                "high": 59,
+                "level": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
 }

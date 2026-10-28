@@ -14,13 +14,25 @@ const css=`/* Shared readability tokens. Generated from src/design/tokens.json. 
 }
 `;
 write('design-system.css',css);
-const template=name=>read(name).replace('/* DESIGN_TOKENS */\n',css);
-const schema=JSON.parse(read('src/schemas/v2.json'));delete schema.title;delete schema.$schema;
-const extra={ordered_types:shapes,max_webhook_envelope_utf8_bytes:5000,webhook_envelope:{merge_variables:'SCREEN'},equal_table_row_header_lengths:true,spotlight_first_value_max_chars:3,scoreboard_first_four_values_max_chars:4,focus_first_title_max_chars:24,week_max_one_today:true,month_today_and_marked_within_days_in_month:true,almanac_max_dates:3,almanac_first_title_max_chars:18,weekahead_brief_title_max_chars:24,weekahead_brief_text_max_chars:120,countdown_brief_text_max_chars:120,countdown_brief_text_max_chars:120,month_first_weekday:'1=Monday..7=Sunday'};
+const wx=JSON.parse(read('src/design/weather.json'));
+const wxNames=Object.keys(wx.conditions),wxList=k=>`'${wxNames.map(n=>wx.conditions[n][k]).join(',')}' | split: ','`;
+const wxTables=`{% assign wx_names = '${wxNames.join(',')}' | split: ',' %}{% assign wx_files = ${wxList('icon')} %}{% assign wx_shades = ${wxList('shade')} %}`;
+const wxFind=(v,body)=>`{% for c in wx_names %}{% if c == ${v} %}${body}{% endif %}{% endfor %}`;
+// Icons load from the URLs the Weather Glance plugin used; vendor/weather-icons pins the same files for offline tests.
+const wxImg=(v,cls)=>`{% assign wxf = 'na' %}${wxFind(v,'{% assign wxf = wx_files[forloop.index0] %}')}<img class="${cls}" src="${wx.icon_url.replace('{icon}','{{ wxf }}')}" alt="">`;
+const wxShade=v=>`{% assign shade = 75 %}${wxFind(v,'{% assign shade = wx_shades[forloop.index0] | plus: 0 %}')}`;
+const template=name=>read(name).replace('/* DESIGN_TOKENS */\n',css).replace('@@WX_TABLES@@',wxTables).replace(/@@WX\(([\w.]+)\|([^)]+)\)@@/g,(_,v,cls)=>wxImg(v,cls)).replace(/@@WX_SHADE\(([\w.]+)\)@@/g,(_,v)=>wxShade(v)).replaceAll('@@RANGE_LEVEL_CASE@@','{% case p.level %}'+wx.range_levels.map((v,i)=>`{% when ${i} %}{% assign shade = ${v} %}`).join('')+`{% else %}{% assign shade = ${wx.range_levels[0]} %}{% endcase %}`).replaceAll('@@INVERSE_AT_OR_BELOW@@',t.ink.fills.inverse_at_or_below);
+const schema=JSON.parse(read('src/schemas/v2.json'));
+if(schema.definitions.condition.enum.join()!==Object.keys(wx.conditions).join())throw Error('Schema conditions differ from src/design/weather.json');delete schema.title;delete schema.$schema;
+const fit=JSON.parse(read('src/design/columns.json'));delete fit.source;
+const extra={ordered_types:shapes,ordered_types_alternatives:'a|b accepts either type in that slot',columns_fit:fit,columns_fit_rule:'per column n: inner=row_px/n-column_inset_px; body line chars=floor(inner/glyph_px.body), words wrap whole, inline icon takes icon_px.inline; label,value(+icon_px.value),metric value,badge(+16),range text fit inner by glyph_px; height=label+(value or icon?value)+per part: part+text lines*line; event time+text lines; metric metric_value+lines; list items wrap at chars-1; badge=badge only; range line+bar; height<=height_px[layout]; at most one highlight; range low<=high',max_webhook_envelope_utf8_bytes:5000,webhook_envelope:{merge_variables:'SCREEN'},equal_table_row_header_lengths:true,spotlight_first_value_max_chars:3,scoreboard_first_four_values_max_chars:4,focus_first_title_max_chars:24,week_max_one_today:true,month_today_and_marked_within_days_in_month:true,almanac_max_dates:3,almanac_first_title_max_chars:18,weekahead_brief_title_max_chars:24,weekahead_brief_text_max_chars:120,countdown_brief_text_max_chars:120,outlook_trend_brief_title_max_chars:24,outlook_trend_brief_text_max_chars:120,forecast_point_mode_low_only:true,forecast_range_and_bars_low_lte_high:true,forecast_display_max_chars_after_rounding:3,range_value_display_max_chars:4,condition_wmo_codes:Object.fromEntries(Object.entries(wx.conditions).map(([k,c])=>[k,c.wmo])),month_first_weekday:'1=Monday..7=Sunday'};
 const contract=read('src/contract.liquid')
  .replace('@@SCREEN_SCHEMA_JSON@@',JSON.stringify(schema))
  .replace('@@EXTRA_VALIDATION_JSON@@',JSON.stringify(extra))
  .replace('@@DESIGN_TOKENS_JSON@@',JSON.stringify(t));
 write('AI-CONTRACT.liquid',contract);
-write('full.liquid',contract+'{% if schema_version == 2 %}\n'+template('src/templates/v2.liquid')+'\n{% else %}\n'+template('src/templates/v1.liquid')+'\n{% endif %}\n');
+const full=contract+'{% if schema_version == 2 %}\n'+template('src/templates/v2.liquid')+'\n{% else %}\n'+template('src/templates/v1.liquid')+'\n{% endif %}\n';
+// writeMarkup rejected an 85 kB upload with HTTP 413; keep a margin below it.
+if(Buffer.byteLength(full)>60000)throw Error('dist/full.liquid is '+Buffer.byteLength(full)+' bytes; keep it under 60000 for writeMarkup');
+write('full.liquid',full);
 console.log('Built shared tokens and installed renderer.');
