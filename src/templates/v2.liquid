@@ -27,13 +27,26 @@
 .dui-cal-day {font-size:42px;font-weight:780;line-height:1;letter-spacing:-1.5px;}
 .dui-cal-text {font-size:18px;line-height:23px;}
 .dui-cal-until {font-size:var(--ui-meta-size);font-weight:var(--ui-meta-weight);line-height:var(--ui-meta-leading);text-transform:uppercase;letter-spacing:.6px;margin-top:3px;}
-.dui-week {display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border-top:3px solid #000;height:calc(100% - 32px);}
-.dui-day {display:flex;flex-direction:column;gap:4px;padding:8px 10px 0;border-right:1px solid #000;min-width:0;}
-.dui-day:last-child {border-right:0;}
-.dui-day--today {background:#000;color:#fff;}
-.dui-day-name {font-size:var(--ui-meta-size);font-weight:var(--ui-meta-weight);line-height:var(--ui-meta-leading);letter-spacing:1px;text-transform:uppercase;}
-.dui-day-num {font-size:38px;font-weight:780;line-height:1;letter-spacing:-1.5px;margin-bottom:4px;}
-.dui-day-item {font-size:17px;line-height:21px;padding-top:4px;border-top:1px solid currentColor;}
+.dui-cols {display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border-top:3px solid #000;height:calc(100% - 32px);}
+.dui-col {display:flex;flex-direction:column;gap:4px;padding:8px 10px 0;border-right:1px solid #000;min-width:0;}
+.dui-col:last-child {border-right:0;}
+.dui-col--hl {background:#000;color:#fff;}
+.dui-col-label {font-size:var(--ui-meta-size);font-weight:var(--ui-meta-weight);line-height:var(--ui-meta-leading);letter-spacing:1px;text-transform:uppercase;}
+.dui-col-value {font-size:38px;font-weight:780;line-height:1;letter-spacing:-1.5px;margin-bottom:4px;}
+.dui-part {font-size:17px;line-height:21px;padding-top:4px;border-top:1px solid currentColor;}
+.dui-col--center {justify-content:center;}
+.dui-col--spread {justify-content:space-between;}
+.dui-col--bottom {justify-content:flex-end;}
+.dui-spacer {flex:1 0 0;}
+.dui-row {display:flex;gap:8px;align-items:flex-start;}
+.dui-row > * {flex:1 1 0;min-width:0;}
+.dui-row > .dui-part {border-top:0;padding-top:0;}
+.dui-row > .dui-part-badge {margin-top:0;}
+:is(.dui-row--between,.dui-row--start,.dui-row--end) > * {flex:0 1 auto;}
+.dui-row--between {justify-content:space-between;}
+.dui-row--end {justify-content:flex-end;}
+.dui-row--center {align-items:center;}
+.dui-row--baseline {align-items:baseline;}
 .dui-part-time {display:block;font-weight:750;}
 .dui-part-value {display:block;font-size:28px;font-weight:780;line-height:31px;letter-spacing:-.8px;white-space:nowrap;}
 .dui-part-list span {display:block;padding-left:.6em;text-indent:-.6em;}
@@ -48,7 +61,7 @@
 .dui-mday--today {background:#000;color:#fff;font-weight:780;}
 .dui-wx {width:1.35em;height:1.35em;object-fit:contain;vertical-align:-.3em;flex:none;}
 .dui-wx--inline {margin-right:.25em;}
-.dui-value .dui-wx,.dui-day-num .dui-wx,.dui-part-value .dui-wx {width:.75em;height:.75em;vertical-align:.02em;margin-right:0;margin-left:.15em;}
+.dui-value .dui-wx,.dui-col-value .dui-wx,.dui-part-value .dui-wx {width:.75em;height:.75em;vertical-align:.02em;margin-right:0;margin-left:.15em;}
 .dui-chart {display:grid;grid-template-columns:repeat(var(--n),1fr);grid-template-rows:auto 1fr;gap:8px 12px;height:calc(100% - 32px);--pill-min:72px;--pill-h:84px;}
 .dui-chart--now {grid-template-columns:170px repeat(var(--n),1fr);}
 .dui-chart--icons {--pill-min:120px;}
@@ -66,7 +79,7 @@
 .dui-pill--inverse {color:#fff;--framework-stroke-contrast:#000;}
 /* Icons are black remote SVGs: invert them on dark ground, outlining first so they survive dithered fills. */
 .dui-pill--inverse .dui-wx {filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) invert(1);}
-.dui-day--today .dui-wx,.dui--spotlight .dui-block:first-child .dui-wx {filter:invert(1);}
+.dui-col--hl .dui-wx,.dui--spotlight .dui-block:first-child .dui-wx {filter:invert(1);}
 :is(.screen--2bit,.screen--4bit) .dui-pill--inverse:is(.bg--gray-30,.bg--gray-45) {--framework-stroke-contrast:#555;}
 .dui-pill--inverse .text-stroke {-webkit-text-stroke-color:var(--framework-stroke-contrast);}
 .dui-now {position:absolute;left:0;right:14px;height:0;}
@@ -126,12 +139,12 @@
 .dui--almanac .dui-main {grid-template-columns:1.15fr 1fr;gap:30px;}
 .dui--almanac .dui-block:first-child {border-right:1px solid #000;padding-right:28px;}
 .dui--almanac .dui-block:first-child .dui-label {font-family:Georgia,serif!important;font-size:31px;text-transform:none;letter-spacing:-.6px;font-weight:400;line-height:34px;margin-bottom:6px;}
-/* Seven open columns with a short interpretation underneath; outlook and trend reuse it for range charts. */
+/* Open columns with a short interpretation underneath; outlook and trend reuse it for range charts. */
 :is(.dui--weekahead,.dui--outlook,.dui--trend) .dui-main {grid-template-rows:1fr auto;gap:16px;margin-top:18px;}
 :is(.dui--weekahead,.dui--outlook,.dui--trend) .dui-block:last-child {border-top:3px solid #000;padding-top:12px;display:grid;grid-template-columns:1fr 2.2fr;gap:25px;}
 :is(.dui--weekahead,.dui--outlook,.dui--trend) .dui-block:last-child .dui-label {font-family:Georgia,serif!important;font-size:27px;line-height:1.1;text-transform:none;letter-spacing:-.4px;font-weight:400;}
 :is(.dui--weekahead,.dui--outlook,.dui--trend) .dui-block:last-child .dui-body {font-size:17px;line-height:1.4;}
-.dui--weekahead .dui-week {border-bottom:1px solid #000;}
+.dui--weekahead .dui-cols {border-bottom:1px solid #000;}
 /* Full-height columns, one per person, project or day. */
 .dui--board .dui-main {grid-template-rows:1fr;margin-top:18px;}
 /* A lead line above calendar leaves counting down to each date. */
@@ -161,7 +174,6 @@
 {% when 'agenda' %}<div class="dui-events">{% for item in block.items limit:3 %}<div class="dui-event"><span class="dui-time">{{ item.time | truncate:8 | escape }}</span><span class="dui-event-text">{% if item.icon %}@@WX(item.icon|dui-wx dui-wx--inline)@@{% endif %}{{ item.text | truncate:38 | escape }}</span></div>{% endfor %}</div>
 {% when 'table' %}<table class="dui-table"><thead><tr>{% for cell in block.headers limit:3 %}<th>{{ cell | truncate:18 | escape }}</th>{% endfor %}</tr></thead><tbody>{% for row in block.rows limit:3 %}<tr>{% for cell in row limit:3 %}<td>{{ cell | truncate:24 | escape }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>
 {% when 'dates' %}<div class="dui-cal">{% for item in block.items limit:4 %}<div class="dui-cal-item"><div class="dui-cal-leaf"><span class="dui-cal-month">{{ item.month | truncate:4 | escape }}</span><span class="dui-cal-day">{{ item.day | truncate:2 | escape }}</span>{% if item.weekday %}<span class="dui-cal-month">{{ item.weekday | truncate:3 | escape }}</span>{% endif %}</div><div>{% if item.until %}<div class="dui-cal-until">{{ item.until | truncate:12 | escape }}</div>{% endif %}<div class="dui-cal-text">{% if item.icon %}@@WX(item.icon|dui-wx dui-wx--inline)@@{% endif %}{{ item.text | truncate:36 | escape }}</div></div></div>{% endfor %}</div>
-{% when 'week' %}<div class="dui-week">{% for d in block.days limit:7 %}<div class="dui-day{% if d.today == true %} dui-day--today{% endif %}"><span class="dui-day-name">{{ d.weekday | truncate:3 | escape }}</span><span class="dui-day-num">{{ d.day | truncate:2 | escape }}{% if d.icon %}@@WX(d.icon|dui-wx)@@{% endif %}</span>{% for e in d.items limit:2 %}<span class="dui-day-item">{{ e | truncate:18 | escape }}</span>{% endfor %}</div>{% endfor %}</div>
 {% when 'columns' %}{% liquid
 assign found = false
 for col in block.columns limit:8
@@ -179,6 +191,23 @@ for col in block.columns limit:8
         assign lo = p.low
       endif
     endif
+    if p.kind == 'row'
+      for q in p.items
+        if q.kind == 'range'
+          if found == false
+            assign hi = q.high
+            assign lo = q.low
+            assign found = true
+          endif
+          if q.high > hi
+            assign hi = q.high
+          endif
+          if q.low < lo
+            assign lo = q.low
+          endif
+        endif
+      endfor
+    endif
   endfor
 endfor
 assign k = 0
@@ -188,14 +217,7 @@ if found
     assign k = 100.0 | divided_by: span
   endif
 endif
-%}<div class="dui-week">{% for col in block.columns limit:8 %}<div class="dui-day{% if col.highlight == true %} dui-day--today{% endif %}"><span class="dui-day-name">{{ col.label | truncate:12 | escape }}</span>{% if col.value or col.icon %}<span class="dui-day-num">{{ col.value | truncate:4 | escape }}{% if col.icon %}@@WX(col.icon|dui-wx)@@{% endif %}</span>{% endif %}{% for p in col.content limit:6 %}{% case p.kind %}
-{% when 'text' %}<span class="dui-day-item">{% if p.icon %}@@WX(p.icon|dui-wx dui-wx--inline)@@{% endif %}{{ p.text | truncate:60 | escape }}</span>
-{% when 'event' %}<span class="dui-day-item"><b class="dui-part-time">{{ p.time | truncate:8 | escape }}</b>{% if p.icon %}@@WX(p.icon|dui-wx dui-wx--inline)@@{% endif %}{{ p.text | truncate:48 | escape }}</span>
-{% when 'metric' %}<span class="dui-day-item"><b class="dui-part-value">{{ p.value | truncate:5 | escape }}{% if p.icon %}@@WX(p.icon|dui-wx)@@{% endif %}</b>{{ p.text | truncate:24 | escape }}</span>
-{% when 'list' %}<span class="dui-day-item dui-part-list">{% for e in p.items limit:3 %}<span>{{ e | truncate:24 | escape }}</span>{% endfor %}</span>
-{% when 'badge' %}<span class="dui-part-badge">{{ p.text | truncate:12 | escape }}</span>
-{% when 'range' %}{% if k > 0 %}{% assign x = p.low | minus: lo | times: k %}{% assign w = p.high | minus: p.low | times: k %}{% else %}{% assign x = 0 %}{% assign w = 100 %}{% endif %}@@RANGE_LEVEL_CASE@@<span class="dui-day-item"><b>{{ p.low }}–{{ p.high }}{{ block.unit | truncate:4 | escape }}</b><span class="dui-part-bar"><span class="bg--gray-{{ shade }}" style="left:{{ x | round:1 }}%;width:{{ w | round:1 }}%"></span></span></span>
-{% endcase %}{% endfor %}</div>{% endfor %}</div>
+%}<div class="dui-cols">{% for col in block.columns limit:8 %}<div class="dui-col dui-col--{{ col.align | default: 'top' | escape }}{% if col.highlight == true %} dui-col--hl{% endif %}"><span class="dui-col-label">{{ col.label | truncate:12 | escape }}</span>{% if col.value or col.icon %}<span class="dui-col-value">{{ col.value | truncate:4 | escape }}{% if col.icon %}@@WX(col.icon|dui-wx)@@{% endif %}</span>{% endif %}{% for p in col.content limit:6 %}{% if p.kind == 'row' %}{% assign prow = p %}<div class="dui-part dui-row dui-row--{{ prow.justify | default: 'equal' | escape }} dui-row--{{ prow.align | default: 'top' | escape }}">{% for p in prow.items %}@@COLUMN_PART@@{% endfor %}</div>{% elsif p.kind == 'spacer' %}<span class="dui-spacer"></span>{% else %}@@COLUMN_PART@@{% endif %}{% endfor %}</div>{% endfor %}</div>
 {% when 'month' %}{% assign lead = block.first_weekday | at_least:1 | at_most:7 | minus:1 %}{% assign last = block.days_in_month | at_least:28 | at_most:31 %}<div class="dui-month"><span class="dui-dow">M</span><span class="dui-dow">T</span><span class="dui-dow">W</span><span class="dui-dow">T</span><span class="dui-dow">F</span><span class="dui-dow">S</span><span class="dui-dow">S</span>{% for i in (1..lead) %}<span></span>{% endfor %}{% for d in (1..last) %}<span class="dui-mday{% if block.marked contains d %} dui-mday--marked{% endif %}{% if d == block.today %} dui-mday--today{% endif %}">{{ d }}</span>{% endfor %}</div>
 {% when 'forecast','range' %}{% liquid
 if block.type == 'forecast'

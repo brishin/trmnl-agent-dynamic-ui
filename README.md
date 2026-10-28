@@ -58,7 +58,7 @@ Prefer `schema_version:2`. Select a composition and provide plain text in the pr
 | focus | brief, list |
 | dispatch | brief, table, agenda |
 | almanac | month, dates |
-| weekahead | week or columns, brief |
+| weekahead | columns, brief |
 | countdown | brief, dates |
 | outlook | forecast, brief |
 | trend | range, brief |

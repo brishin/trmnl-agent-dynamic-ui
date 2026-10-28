@@ -3,9 +3,10 @@
   "count": {"min": 2, "max": 8},
   "parts_max": 6,
   "row_px": 732,
+  "row_gap_px": 8,
   "column_inset_px": 21,
   "glyph_px": {"body": 11, "label": 14, "value": 24, "metric": 18, "badge": 13},
   "icon_px": {"inline": 28, "value": 32},
   "height_px": {"weekahead": 205, "board": 305},
-  "cost_px": {"line": 21, "part": 9, "label": 26, "value": 42, "metric_value": 31, "badge": 33, "bar": 16}
+  "cost_px": {"line": 21, "part": 9, "label": 26, "value": 42, "metric_value": 31, "badge": 33, "bar": 16, "baseline": 10}
 }

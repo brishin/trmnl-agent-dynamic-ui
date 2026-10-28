@@ -363,76 +363,6 @@
             "type": "object",
             "properties": {
               "type": {
-                "const": "week"
-              },
-              "width": {
-                "enum": [
-                  "half",
-                  "full"
-                ]
-              },
-              "emphasis": {
-                "enum": [
-                  "normal",
-                  "important"
-                ]
-              },
-              "title": {
-                "type": "string",
-                "minLength": 1,
-                "maxLength": 32
-              },
-              "days": {
-                "type": "array",
-                "minItems": 5,
-                "maxItems": 7,
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "weekday": {
-                      "type": "string",
-                      "minLength": 1,
-                      "maxLength": 3
-                    },
-                    "day": {
-                      "type": "string",
-                      "pattern": "^[0-9]{1,2}$"
-                    },
-                    "today": {
-                      "type": "boolean"
-                    },
-                    "items": {
-                      "type": "array",
-                      "maxItems": 2,
-                      "items": {
-                        "type": "string",
-                        "minLength": 1,
-                        "maxLength": 18
-                      }
-                    },
-                    "icon": {
-                      "$ref": "#/definitions/condition"
-                    }
-                  },
-                  "required": [
-                    "weekday",
-                    "day"
-                  ],
-                  "additionalProperties": false
-                }
-              }
-            },
-            "required": [
-              "type",
-              "title",
-              "days"
-            ],
-            "additionalProperties": false
-          },
-          {
-            "type": "object",
-            "properties": {
-              "type": {
                 "const": "columns"
               },
               "width": {
@@ -480,151 +410,27 @@
                     "highlight": {
                       "type": "boolean"
                     },
+                    "align": {
+                      "enum": [
+                        "top",
+                        "center",
+                        "spread",
+                        "bottom"
+                      ]
+                    },
                     "content": {
                       "type": "array",
                       "maxItems": 6,
                       "items": {
                         "oneOf": [
                           {
-                            "type": "object",
-                            "properties": {
-                              "kind": {
-                                "const": "text"
-                              },
-                              "text": {
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 60
-                              },
-                              "icon": {
-                                "$ref": "#/definitions/condition"
-                              }
-                            },
-                            "required": [
-                              "kind",
-                              "text"
-                            ],
-                            "additionalProperties": false
+                            "$ref": "#/definitions/part"
                           },
                           {
-                            "type": "object",
-                            "properties": {
-                              "kind": {
-                                "const": "event"
-                              },
-                              "time": {
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 8
-                              },
-                              "text": {
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 48
-                              },
-                              "icon": {
-                                "$ref": "#/definitions/condition"
-                              }
-                            },
-                            "required": [
-                              "kind",
-                              "time",
-                              "text"
-                            ],
-                            "additionalProperties": false
+                            "$ref": "#/definitions/row"
                           },
                           {
-                            "type": "object",
-                            "properties": {
-                              "kind": {
-                                "const": "metric"
-                              },
-                              "value": {
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 5
-                              },
-                              "text": {
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 24
-                              },
-                              "icon": {
-                                "$ref": "#/definitions/condition"
-                              }
-                            },
-                            "required": [
-                              "kind",
-                              "value",
-                              "text"
-                            ],
-                            "additionalProperties": false
-                          },
-                          {
-                            "type": "object",
-                            "properties": {
-                              "kind": {
-                                "const": "list"
-                              },
-                              "items": {
-                                "type": "array",
-                                "minItems": 1,
-                                "maxItems": 3,
-                                "items": {
-                                  "type": "string",
-                                  "minLength": 1,
-                                  "maxLength": 24
-                                }
-                              }
-                            },
-                            "required": [
-                              "kind",
-                              "items"
-                            ],
-                            "additionalProperties": false
-                          },
-                          {
-                            "type": "object",
-                            "properties": {
-                              "kind": {
-                                "const": "badge"
-                              },
-                              "text": {
-                                "type": "string",
-                                "minLength": 1,
-                                "maxLength": 12
-                              }
-                            },
-                            "required": [
-                              "kind",
-                              "text"
-                            ],
-                            "additionalProperties": false
-                          },
-                          {
-                            "type": "object",
-                            "properties": {
-                              "kind": {
-                                "const": "range"
-                              },
-                              "low": {
-                                "$ref": "#/definitions/number"
-                              },
-                              "high": {
-                                "$ref": "#/definitions/number"
-                              },
-                              "level": {
-                                "type": "integer",
-                                "minimum": 0,
-                                "maximum": 3
-                              }
-                            },
-                            "required": [
-                              "kind",
-                              "low",
-                              "high"
-                            ],
-                            "additionalProperties": false
+                            "$ref": "#/definitions/spacer"
                           }
                         ]
                       }
@@ -950,6 +756,198 @@
         "falling",
         "steady"
       ]
+    },
+    "part": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "text"
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 60
+            },
+            "icon": {
+              "$ref": "#/definitions/condition"
+            }
+          },
+          "required": [
+            "kind",
+            "text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "event"
+            },
+            "time": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 48
+            },
+            "icon": {
+              "$ref": "#/definitions/condition"
+            }
+          },
+          "required": [
+            "kind",
+            "time",
+            "text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "metric"
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 5
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 24
+            },
+            "icon": {
+              "$ref": "#/definitions/condition"
+            }
+          },
+          "required": [
+            "kind",
+            "value",
+            "text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "list"
+            },
+            "items": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 3,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 24
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "items"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "badge"
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 12
+            }
+          },
+          "required": [
+            "kind",
+            "text"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "range"
+            },
+            "low": {
+              "$ref": "#/definitions/number"
+            },
+            "high": {
+              "$ref": "#/definitions/number"
+            },
+            "level": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            }
+          },
+          "required": [
+            "kind",
+            "low",
+            "high"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "row": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "row"
+        },
+        "justify": {
+          "enum": [
+            "equal",
+            "between",
+            "start",
+            "end"
+          ]
+        },
+        "align": {
+          "enum": [
+            "top",
+            "center",
+            "baseline"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/part"
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "spacer": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "spacer"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false
     }
   }
 }

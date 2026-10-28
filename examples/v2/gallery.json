@@ -287,58 +287,85 @@
     "updated_at": "TUE 27 OCT · SAMPLE DATA",
     "blocks": [
       {
-        "type": "week",
+        "type": "columns",
         "title": "Week of October 26",
-        "days": [
+        "columns": [
           {
-            "weekday": "MON",
-            "day": "26",
-            "items": [
-              "Launch kickoff"
+            "label": "MON",
+            "value": "26",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Launch kickoff"
+              }
             ]
           },
           {
-            "weekday": "TUE",
-            "day": "27",
-            "today": true,
-            "items": [
-              "Review · 1:30",
-              "Dinner with Sam"
+            "label": "TUE",
+            "value": "27",
+            "highlight": true,
+            "content": [
+              {
+                "kind": "text",
+                "text": "Review · 1:30"
+              },
+              {
+                "kind": "text",
+                "text": "Dinner with Sam"
+              }
             ]
           },
           {
-            "weekday": "WED",
-            "day": "28",
-            "items": [
-              "Call Mom · 70th"
+            "label": "WED",
+            "value": "28",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Call Mom · 70th"
+              }
             ]
           },
           {
-            "weekday": "THU",
-            "day": "29",
-            "items": [
-              "Dentist · 3:00",
-              "QA sign-off"
+            "label": "THU",
+            "value": "29",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Dentist · 3:00"
+              },
+              {
+                "kind": "text",
+                "text": "QA sign-off"
+              }
             ]
           },
           {
-            "weekday": "FRI",
-            "day": "30",
-            "items": [
-              "Team demo · 2:00"
+            "label": "FRI",
+            "value": "30",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Team demo · 2:00"
+              }
             ]
           },
           {
-            "weekday": "SAT",
-            "day": "31",
-            "items": [
-              "Soccer · 9:00",
-              "Trick-or-treat"
+            "label": "SAT",
+            "value": "31",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Soccer · 9:00"
+              },
+              {
+                "kind": "text",
+                "text": "Trick-or-treat"
+              }
             ]
           },
           {
-            "weekday": "SUN",
-            "day": "1"
+            "label": "SUN",
+            "value": "1"
           }
         ]
       },
@@ -553,6 +580,9 @@
                 "text": "Piano with Ms. Ortiz"
               },
               {
+                "kind": "spacer"
+              },
+              {
                 "kind": "list",
                 "items": [
                   "Sign field-trip form",
@@ -577,9 +607,19 @@
                 "icon": "showers"
               },
               {
-                "kind": "metric",
-                "value": "3",
-                "text": "Spelling words left"
+                "kind": "row",
+                "items": [
+                  {
+                    "kind": "metric",
+                    "value": "3",
+                    "text": "Spelling"
+                  },
+                  {
+                    "kind": "metric",
+                    "value": "12",
+                    "text": "Math"
+                  }
+                ]
               }
             ]
           },
@@ -602,7 +642,8 @@
                   "Batteries (AA)"
                 ]
               }
-            ]
+            ],
+            "align": "spread"
           }
         ]
       }

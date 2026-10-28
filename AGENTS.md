@@ -4,7 +4,7 @@ Private TRMNL plugin; see `README.md` for commands and `docs/design-system.md` f
 
 ## Source and output
 
-- `src/templates/`: v1 grid and twelve v2 compositions; prefer schema v2.
+- `src/templates/`: v1 grid and twelve v2 compositions; `column-part.liquid` is inlined by the build into column stacks and rows. Prefer schema v2.
 - `src/schemas/`, `src/validate*.mjs`: payload contracts and composition checks.
 - `src/design/tokens.json`: shared typography, spacing and ink; `src/design/weather.json`: weather conditions, icons and shades; `src/design/columns.json`: column fit budgets.
 - `src/contract.liquid`: compact AI-facing contract; preserve its build placeholders.

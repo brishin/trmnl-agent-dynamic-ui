@@ -2,33 +2,40 @@ import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import Ajv from 'ajv';
 const check=new Ajv({allErrors:true}).compile(JSON.parse(fs.readFileSync(new URL('schemas/v2.json',import.meta.url))));
-export const shapes={editorial:['brief','metric','list'],spotlight:['metric','brief','agenda'],timeline:['agenda','list'],scoreboard:['metric','metric','metric','metric','brief'],focus:['brief','list'],dispatch:['brief','table','agenda'],almanac:['month','dates'],weekahead:['week|columns','brief'],countdown:['brief','dates'],outlook:['forecast','brief'],trend:['range','brief'],board:['columns']};
+export const shapes={editorial:['brief','metric','list'],spotlight:['metric','brief','agenda'],timeline:['agenda','list'],scoreboard:['metric','metric','metric','metric','brief'],focus:['brief','list'],dispatch:['brief','table','agenda'],almanac:['month','dates'],weekahead:['columns','brief'],countdown:['brief','dates'],outlook:['forecast','brief'],trend:['range','brief'],board:['columns']};
 const fit=JSON.parse(fs.readFileSync(new URL('design/columns.json',import.meta.url)));
 // Greedy wrap at whole words; a word longer than a line breaks anywhere, as overflow-wrap does.
 const lines=(s,chars)=>{let n=1,used=0;for(const w of s.split(' ')){const need=used?used+1+w.length:w.length;if(need<=chars)used=need;else{n+=(used?1:0)+Math.ceil(w.length/chars)-1;used=w.length%chars||chars;}}return n;};
 export function columnsFit(b,layout){
- const n=b.columns.length,inner=fit.row_px/n-fit.column_inset_px,g=fit.glyph_px,c=fit.cost_px,chars=Math.floor(inner/g.body),iconChars=Math.ceil(fit.icon_px.inline/g.body);
- const wide=(ok,what)=>{if(!ok)throw Error(what+' is too wide for '+n+' columns; body lines fit '+chars+' characters');};
+ const n=b.columns.length,g=fit.glyph_px,c=fit.cost_px,colInner=fit.row_px/n-fit.column_inset_px;
+ // Height of one leaf part's content, checked against the width it gets: the column, or its share of a row.
+ const body=(p,inner)=>{
+  const chars=Math.floor(inner/g.body),where=Math.round(inner)+'px ('+chars+' characters per line)';
+  const wide=(ok,what)=>{if(!ok)throw Error(what+' does not fit '+where+' in '+n+' columns');};
+  wide(chars>=2,'A '+p.kind+' part');
+  const t=(x,icon)=>lines((icon?'x'.repeat(Math.ceil(fit.icon_px.inline/g.body))+' ':'')+x,chars)*c.line;
+  if(p.kind==='text')return t(p.text,p.icon);
+  if(p.kind==='event')return t(p.time)+t(p.text,p.icon);
+  if(p.kind==='metric'){wide(p.value.length*g.metric+(p.icon?fit.icon_px.value:0)<=inner,'Metric value');return c.metric_value+t(p.text);}
+  if(p.kind==='list')return p.items.reduce((a,x)=>a+lines(x,chars-1)*c.line,0);
+  if(p.kind==='badge'){wide(p.text.length*g.badge+16<=inner,'Badge');return c.badge-c.part;}
+  if(p.kind==='range'){if(p.low>p.high)throw Error('Range parts need low <= high');wide(String(p.low+'–'+p.high+(b.unit??'')).length*g.body<=inner,'Range text');return c.line+c.bar;}
+ };
  if(b.columns.filter(x=>x.highlight).length>1)throw Error('Columns highlight at most one column');
  for(const col of b.columns){
-  wide(col.label.length*g.label<=inner,'Column label '+JSON.stringify(col.label));
-  wide((col.value?.length??0)*g.value+(col.icon?fit.icon_px.value:0)<=inner,'Column value');
+  if(col.label.length*g.label>colInner)throw Error('Column label '+JSON.stringify(col.label)+' is too wide for '+n+' columns');
+  if((col.value?.length??0)*g.value+(col.icon?fit.icon_px.value:0)>colInner)throw Error('Column value is too wide for '+n+' columns');
   let h=c.label+(col.value||col.icon?c.value:0);
   for(const p of col.content??[]){
-   const t=(x,icon)=>lines((icon?'x'.repeat(iconChars)+' ':'')+x,chars)*c.line;
-   if(p.kind==='text')h+=c.part+t(p.text,p.icon);
-   if(p.kind==='event')h+=c.part+t(p.time)+t(p.text,p.icon);
-   if(p.kind==='metric'){wide(p.value.length*g.metric+(p.icon?fit.icon_px.value:0)<=inner,'Metric value');h+=c.part+c.metric_value+t(p.text);}
-   if(p.kind==='list')h+=c.part+p.items.reduce((a,x)=>a+lines(x,chars-1)*c.line,0);
-   if(p.kind==='badge'){wide(p.text.length*g.badge+16<=inner,'Badge');h+=c.badge;}
-   if(p.kind==='range'){if(p.low>p.high)throw Error('Range parts need low <= high');wide(String(p.low+'–'+p.high+(b.unit??'')).length*g.body<=inner,'Range text');h+=c.part+c.line+c.bar;}
+   if(p.kind==='row'){const k=p.items.length,share=(colInner-fit.row_gap_px*(k-1))/k;h+=c.part+Math.max(...p.items.map(x=>body(x,share)))+(p.align==='baseline'?c.baseline:0);}
+   else if(p.kind!=='spacer')h+=c.part+body(p,colInner);
   }
   if(h>fit.height_px[layout])throw Error('Column '+JSON.stringify(col.label)+' needs about '+h+'px; '+layout+' columns hold '+fit.height_px[layout]+'px');
  }
 }
 export function validate(p){
  if(!check(p))throw Error(JSON.stringify(check.errors));
- if(p.blocks.length!==shapes[p.layout].length||p.blocks.some((b,i)=>!shapes[p.layout][i].split('|').includes(b.type)))throw Error('Components must match this composition: '+shapes[p.layout].join(', '));
+ if(p.blocks.map(b=>b.type).join(',')!==shapes[p.layout].join(','))throw Error('Components must match this composition: '+shapes[p.layout].join(', '));
  if(Buffer.byteLength(JSON.stringify({merge_variables:p}))>5000)throw Error('Webhook exceeds 5 kB');
  for(const b of p.blocks)if(b.type==='table'&&b.rows.some(r=>r.length!==b.headers.length))throw Error('Table rows must match headers');
  const hero=p.blocks[0];
@@ -36,7 +43,6 @@ export function validate(p){
  if(p.layout==='scoreboard'&&p.blocks.slice(0,4).some(b=>b.value.length>4))throw Error('Scoreboard values must be at most 4 characters');
  if(p.layout==='focus'&&hero.title.length>24)throw Error('Focus headline must be at most 24 characters');
  for(const b of p.blocks){
-  if(b.type==='week'&&b.days.filter(d=>d.today).length>1)throw Error('A week marks at most one day as today');
   if(b.type==='month'&&[b.today??1,...(b.marked??[])].some(d=>d>b.days_in_month))throw Error('Month days must not exceed days_in_month');
  }
  if(p.layout==='almanac'&&p.blocks[0].title.length>18)throw Error('Almanac month title must be at most 18 characters');

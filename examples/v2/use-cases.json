@@ -418,43 +418,61 @@
     "updated_at": "SUN 1 NOV · 6:00 PM · SAMPLE",
     "blocks": [
       {
-        "type": "week",
+        "type": "columns",
         "title": "Maya and Leo, Nov 2–6",
-        "days": [
+        "columns": [
           {
-            "weekday": "MON",
-            "day": "2",
-            "items": [
-              "Library books due"
+            "label": "MON",
+            "value": "2",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Library books due"
+              }
             ]
           },
           {
-            "weekday": "TUE",
-            "day": "3",
-            "items": [
-              "No school"
+            "label": "TUE",
+            "value": "3",
+            "content": [
+              {
+                "kind": "text",
+                "text": "No school"
+              }
             ]
           },
           {
-            "weekday": "WED",
-            "day": "4",
-            "items": [
-              "Leo · swim 4:15"
+            "label": "WED",
+            "value": "4",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Leo · swim 4:15"
+              }
             ]
           },
           {
-            "weekday": "THU",
-            "day": "5",
-            "items": [
-              "Picture day",
-              "Maya · piano 5:00"
+            "label": "THU",
+            "value": "5",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Picture day"
+              },
+              {
+                "kind": "text",
+                "text": "Maya · piano 5:00"
+              }
             ]
           },
           {
-            "weekday": "FRI",
-            "day": "6",
-            "items": [
-              "Early pickup 1:30"
+            "label": "FRI",
+            "value": "6",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Early pickup 1:30"
+              }
             ]
           }
         ]
@@ -578,58 +596,73 @@
     "updated_at": "SUN 1 NOV · 6:00 PM · SAMPLE",
     "blocks": [
       {
-        "type": "week",
+        "type": "columns",
         "title": "Plans and skies, Nov 2–8",
-        "days": [
+        "columns": [
           {
-            "weekday": "MON",
-            "day": "2",
+            "label": "MON",
+            "value": "2",
             "icon": "fog",
-            "items": [
-              "Dentist 8:30"
+            "content": [
+              {
+                "kind": "text",
+                "text": "Dentist 8:30"
+              }
             ]
           },
           {
-            "weekday": "TUE",
-            "day": "3",
+            "label": "TUE",
+            "value": "3",
             "icon": "clear",
-            "today": true,
-            "items": [
-              "Vote"
+            "highlight": true,
+            "content": [
+              {
+                "kind": "text",
+                "text": "Vote"
+              }
             ]
           },
           {
-            "weekday": "WED",
-            "day": "4",
+            "label": "WED",
+            "value": "4",
             "icon": "showers",
-            "items": [
-              "Leo · swim 4:15"
+            "content": [
+              {
+                "kind": "text",
+                "text": "Leo · swim 4:15"
+              }
             ]
           },
           {
-            "weekday": "THU",
-            "day": "5",
+            "label": "THU",
+            "value": "5",
             "icon": "thunderstorm",
-            "items": [
-              "Picture day"
+            "content": [
+              {
+                "kind": "text",
+                "text": "Picture day"
+              }
             ]
           },
           {
-            "weekday": "FRI",
-            "day": "6",
+            "label": "FRI",
+            "value": "6",
             "icon": "partly-cloudy"
           },
           {
-            "weekday": "SAT",
-            "day": "7",
+            "label": "SAT",
+            "value": "7",
             "icon": "mostly-clear",
-            "items": [
-              "Hike, 9:00"
+            "content": [
+              {
+                "kind": "text",
+                "text": "Hike, 9:00"
+              }
             ]
           },
           {
-            "weekday": "SUN",
-            "day": "8",
+            "label": "SUN",
+            "value": "8",
             "icon": "light-snow"
           }
         ]
@@ -906,6 +939,139 @@
                 "low": 40,
                 "high": 59,
                 "level": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "uc-19-team-board": {
+    "schema_version": 2,
+    "layout": "board",
+    "heading": "Launch week board",
+    "updated_at": "MON 2 NOV · 9:00 AM · SAMPLE",
+    "blocks": [
+      {
+        "type": "columns",
+        "title": "Who is on what",
+        "columns": [
+          {
+            "label": "Ana",
+            "content": [
+              {
+                "kind": "row",
+                "justify": "between",
+                "align": "center",
+                "items": [
+                  {
+                    "kind": "event",
+                    "time": "10:00",
+                    "text": "API freeze"
+                  },
+                  {
+                    "kind": "badge",
+                    "text": "Lead"
+                  }
+                ]
+              },
+              {
+                "kind": "text",
+                "text": "Review the migration PR"
+              },
+              {
+                "kind": "spacer"
+              },
+              {
+                "kind": "row",
+                "items": [
+                  {
+                    "kind": "metric",
+                    "value": "4",
+                    "text": "Open"
+                  },
+                  {
+                    "kind": "metric",
+                    "value": "9",
+                    "text": "Done"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Jun",
+            "highlight": true,
+            "align": "center",
+            "content": [
+              {
+                "kind": "badge",
+                "text": "Out sick"
+              },
+              {
+                "kind": "text",
+                "text": "Ana covers the pager until Wednesday"
+              }
+            ]
+          },
+          {
+            "label": "Priya",
+            "content": [
+              {
+                "kind": "row",
+                "justify": "between",
+                "align": "baseline",
+                "items": [
+                  {
+                    "kind": "event",
+                    "time": "2:00",
+                    "text": "Docs pass"
+                  },
+                  {
+                    "kind": "badge",
+                    "text": "Docs"
+                  }
+                ]
+              },
+              {
+                "kind": "list",
+                "items": [
+                  "Release notes",
+                  "Pricing page",
+                  "Changelog"
+                ]
+              },
+              {
+                "kind": "spacer"
+              },
+              {
+                "kind": "row",
+                "items": [
+                  {
+                    "kind": "metric",
+                    "value": "2",
+                    "text": "Open"
+                  },
+                  {
+                    "kind": "metric",
+                    "value": "6",
+                    "text": "Done"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Ship",
+            "align": "bottom",
+            "content": [
+              {
+                "kind": "text",
+                "text": "Go/no-go Thursday 4:00"
+              },
+              {
+                "kind": "badge",
+                "text": "On track"
               }
             ]
           }

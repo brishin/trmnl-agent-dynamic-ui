@@ -49,7 +49,7 @@ Use a 4px spacing unit and a 24px main inset in v2. Keep headlines, body text, a
 | focus | brief, list | One action with a definition of done |
 | dispatch | brief, table, agenda | Digest with project and schedule details |
 | almanac | month, dates | Month grid beside the dates it marks |
-| weekahead | week or columns, brief | Day or topic columns with an interpretation |
+| weekahead | columns, brief | Day or topic columns with an interpretation |
 | countdown | brief, dates | Lead line above calendar leaves counting down |
 | outlook | forecast, brief | Weather pills on one temperature scale with an interpretation |
 | trend | range, brief | Floating range bars on one scale with an interpretation |
@@ -64,7 +64,6 @@ Calendar blocks carry dates as plain data; the renderer never computes dates, so
 | Component | Fields | Rendering |
 | --- | --- | --- |
 | `dates` | 1–4 items: `month` (≤4), `day` (1–2 digits), optional `weekday` (≤3), `text` (≤36), optional `until` (≤12, e.g. "In 12 days") | Calendar leaves: a large day number with month and weekday |
-| `week` | 5–7 `days`: `weekday`, `day`, optional `today: true` (at most one), 0–2 `items` (≤18 each) | Equal day columns; today is inverse; empty days stay blank |
 | `month` | `first_weekday` 1=Monday…7=Sunday, `days_in_month` 28–31, optional `today`, up to 10 `marked` day numbers | Monday-first grid; today filled, marked days circled |
 
 Column stress cases fill every count from 2 to 8, in both `board` and `weekahead`, with the widest allowed text and parts until the height budget refuses more.
@@ -111,7 +110,7 @@ Weather conditions set the icon and the fill. WMO codes are those used by Open-M
 
 ## Inline icons
 
-An optional `icon` (any condition above) places a weather icon beside text. It is sized in `em`, so it follows the surrounding type. Icons are black SVG images loaded from `https://trmnl.com/images/plugins/weather/`, the URLs the Weather Glance plugin uses; on dark ground (inverse pills, today in a week, the spotlight hero) a CSS filter inverts them. Inlining them would push the markup past the TRMNL MCP upload limit.
+An optional `icon` (any condition above) places a weather icon beside text. It is sized in `em`, so it follows the surrounding type. Icons are black SVG images loaded from `https://trmnl.com/images/plugins/weather/`, the URLs the Weather Glance plugin uses; on dark ground (inverse pills, a highlighted column, the spotlight hero) a CSS filter inverts them. Inlining them would push the markup past the TRMNL MCP upload limit.
 
 | Where | Placement |
 | --- | --- |
@@ -119,21 +118,23 @@ An optional `icon` (any condition above) places a weather icon beside text. It i
 | `metric` | After the value |
 | `agenda` items | Before the event text |
 | `dates` items | Before the item text |
-| `week` days | After the day number |
+| `columns` headers | After the column value |
+| `text`, `event`, `metric` parts | Before the text, or after a metric figure |
 | `list` items | Give `{"text","icon"}` instead of a plain string; the icon precedes the text |
 
 Text fields stay plain escaped strings; there is no in-string icon syntax. Icons are absent from headings and `updated_at`. An icon takes horizontal space, so long items may wrap sooner.
 
 ## Columns and parts
 
-`columns` generalizes `week`: 2–8 equal columns, each a header and a stack of up to 6 typed parts. Parts are one level deep; a part never contains parts. The agent picks part kinds and supplies plain text; it cannot set sizes, widths or styles.
+`columns` lays out 2–8 equal columns, each a header and a stack of up to 6 parts. A week is a columns block whose labels are weekdays, values are day numbers and highlighted column is today; the separate `week` block was retired in its favor. The agent picks part kinds and supplies plain text; it cannot set sizes, widths or styles.
 
 | Column field | Meaning |
 | --- | --- |
 | `label` (required, ≤12) | Uppercase header, e.g. `WED` or `Maya` |
 | `value` (≤4), `icon` | Large numeral and/or weather icon under the label |
 | `highlight: true` | Inverse column; at most one |
-| `content` | 0–6 parts, in order |
+| `align` | `top` (default), `center`, `spread` (first part at the top, last at the bottom) or `bottom` |
+| `content` | 0–6 parts, in order: leaf parts, `row` or `spacer` |
 
 | Part `kind` | Fields | Rendering |
 | --- | --- | --- |
@@ -146,7 +147,16 @@ Text fields stay plain escaped strings; there is no in-string icon syntax. Icons
 
 Schema lengths are maxima. What fits depends on the column count, so `src/validate-v2.mjs` checks each column against `src/design/columns.json`. A column's content is `732 / n − 21` px wide. Body lines fit that width ÷ 11 characters (2 columns: 31, 5: 12, 8: 6) with whole words wrapping, and an inline icon takes about 3 characters. Labels, values, metric values, badges and range text are checked against their own glyph widths. The header and each part's estimated height are summed and must stay within 205px in `weekahead` or 305px in `board`. Errors name the column and what overflowed.
 
-`week` stays valid and unchanged. Prefer `columns` when days need events, badges, figures or bars, or when columns are not days.
+### Layout inside columns
+
+A column is a vertical flex stack. Two layout parts arrange leaf parts without exposing CSS:
+
+| Part | Fields | Behavior |
+| --- | --- | --- |
+| `row` | `items`: one or more leaf parts; optional `justify` `equal` (default, equal widths), `between`, `start` or `end` (natural widths); optional `align` `top` (default), `center` or `baseline` | Places its items side by side under one rule with an 8px gap. Rows do not wrap and never contain rows or spacers. |
+| `spacer` | none | Absorbs leftover height, so the parts after it sink to the column's bottom. Several spacers share the space. |
+
+There is no limit on row items. Each item is checked at its share of the column, `(width − 8 × (k − 1)) / k`, whatever `justify` is, so a row that is too crowded fails on its narrowest content. A row's height is its tallest item; `baseline` rows add 10px because items drop to meet a metric figure's baseline. Spacers and `align` cost no height.
 
 ## Required render checks
 
