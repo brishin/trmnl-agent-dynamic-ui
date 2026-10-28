@@ -60,3 +60,7 @@ For each of the six gallery screens, the check:
 6. Saves a PNG, portable HTML preview, and `v2/render-results.json`.
 
 Run `npm test` for the build, legacy layouts, payload validation, and the v2 design checks. Use TRMNL `startPreview`/`getPreview` after installing changes to verify its server renderer and target device model. A local gallery check does not certify every possible payload or physical device readability; new content that wraps differently should be previewed too.
+
+## MCP-discoverable contract
+
+The installed Full markup begins with `AGENT_DYNAMIC_UI_CONTRACT/1` in a Liquid comment. An authorized MCP client can call `readMarkup` with `plugin_setting_id: "522048"`, `size: "markup_full"` to retrieve the minified v2 JSON Schema, composition constraints, design tokens, validation limits, legacy rules, and update/preview procedure. The comment is absent from rendered output. `build.mjs` regenerates it from the schema, tokens, and exported composition definitions; `AI-CONTRACT.liquid` is the generated copy. The local render scripts are described but are not exposed as executable MCP tools.
