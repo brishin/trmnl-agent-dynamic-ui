@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "node build.mjs",
-    "test": "npm run build && node test.mjs",
+    "test": "npm run build && npm run test:legacy && npm run test:design",
+    "test:legacy": "node test.mjs",
+    "test:design": "node v2/render.mjs",
     "validate": "node validate.mjs"
   },
   "dependencies": {

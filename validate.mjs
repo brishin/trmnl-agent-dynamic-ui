@@ -2,8 +2,10 @@ import fs from 'node:fs';
 import {fileURLToPath} from 'node:url';
 // Install ajv next to this file, or run through the included local project.
 import Ajv from 'ajv';
+import {validate as validateV2} from './v2/validate.mjs';
 const check=new Ajv({allErrors:true}).compile(JSON.parse(fs.readFileSync(new URL('./screen.schema.json',import.meta.url))));
 export function validate(payload){
+ if(payload.schema_version===2)return validateV2(payload);
  if(!check(payload))throw new Error(JSON.stringify(check.errors));
  if(Buffer.byteLength(JSON.stringify({merge_variables:payload}),'utf8')>5000)throw new Error('Payload exceeds the 5 kB webhook budget');
  let slots=0;

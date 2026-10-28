@@ -1,0 +1,236 @@
+{
+  "01-editorial": {
+    "schema_version": 2,
+    "layout": "editorial",
+    "heading": "The morning edition",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "brief",
+        "width": "half",
+        "title": "Make room for the hard part.",
+        "text": "The calendar is quiet until 1:30. Use the first two hours to finish the launch recommendation, while your attention is still yours."
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Uninterrupted",
+        "value": "2h 45m",
+        "text": "Your longest open stretch today"
+      },
+      {
+        "type": "list",
+        "width": "half",
+        "title": "Worth finishing today",
+        "items": [
+          "Send the launch recommendation",
+          "Review the onboarding copy",
+          "Leave the last hour flexible"
+        ]
+      }
+    ]
+  },
+  "02-spotlight": {
+    "schema_version": 2,
+    "layout": "spotlight",
+    "heading": "A little breathing room",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Until your next meeting",
+        "value": "92",
+        "text": "MINUTES"
+      },
+      {
+        "type": "brief",
+        "width": "half",
+        "title": "One draft. One decision.",
+        "text": "Choose the launch scope, write the rationale, and send it before lunch. Everything else can wait."
+      },
+      {
+        "type": "agenda",
+        "width": "half",
+        "title": "Then the afternoon begins",
+        "items": [
+          {
+            "time": "1:30",
+            "text": "Product review"
+          },
+          {
+            "time": "2:45",
+            "text": "Design critique"
+          },
+          {
+            "time": "4:00",
+            "text": "Weekly check-in"
+          }
+        ]
+      }
+    ]
+  },
+  "03-timeline": {
+    "schema_version": 2,
+    "layout": "timeline",
+    "heading": "From work to whatever’s next",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "agenda",
+        "width": "half",
+        "title": "Your evening",
+        "items": [
+          {
+            "time": "5:45",
+            "text": "Close the laptop. Walk to class."
+          },
+          {
+            "time": "6:15",
+            "text": "Strength class · 50 minutes"
+          },
+          {
+            "time": "7:30",
+            "text": "Dinner with Sam · West Village"
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "width": "half",
+        "title": "Before you go",
+        "items": [
+          "Pack gym shoes and a clean tee",
+          "Send the review notes",
+          "Take the long way home"
+        ]
+      }
+    ]
+  },
+  "04-scoreboard": {
+    "schema_version": 2,
+    "layout": "scoreboard",
+    "heading": "Small signals, big picture",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Focus",
+        "value": "165",
+        "text": "minutes protected"
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Meetings",
+        "value": "3",
+        "text": "all after lunch"
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Steps",
+        "value": "6.4k",
+        "text": "3.6k left to your goal"
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Loose ends",
+        "value": "2",
+        "text": "both waiting on replies"
+      },
+      {
+        "type": "brief",
+        "width": "half",
+        "title": "You have enough room.",
+        "text": "Do the important thing before the busy part of the day. A short walk at lunch would be a good trade, too."
+      }
+    ]
+  },
+  "05-focus": {
+    "schema_version": 2,
+    "layout": "focus",
+    "heading": "For the next 45 minutes",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "brief",
+        "width": "half",
+        "title": "Get the draft out.",
+        "text": "A clear recommendation beats another hour of polishing. You have the notes. Pick a direction and press send."
+      },
+      {
+        "type": "list",
+        "width": "half",
+        "title": "Done looks like",
+        "items": [
+          "One recommended launch scope",
+          "Three reasons behind the choice",
+          "A draft in the team’s inbox"
+        ]
+      }
+    ]
+  },
+  "06-dispatch": {
+    "schema_version": 2,
+    "layout": "dispatch",
+    "heading": "The week in motion",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "brief",
+        "width": "half",
+        "title": "The launch is taking shape.",
+        "text": "Two decisions remain: final onboarding copy and the release date. The draft brief is ready for review; QA is on track for Thursday."
+      },
+      {
+        "type": "table",
+        "width": "half",
+        "title": "On the desk",
+        "headers": [
+          "Project",
+          "Next move",
+          "Due"
+        ],
+        "rows": [
+          [
+            "Onboarding",
+            "Copy review",
+            "Wed"
+          ],
+          [
+            "Release",
+            "QA sign-off",
+            "Thu"
+          ],
+          [
+            "Launch brief",
+            "Send draft",
+            "Today"
+          ]
+        ]
+      },
+      {
+        "type": "agenda",
+        "width": "half",
+        "title": "Coming up",
+        "items": [
+          {
+            "time": "WED",
+            "text": "Onboarding review"
+          },
+          {
+            "time": "THU",
+            "text": "Release readiness"
+          },
+          {
+            "time": "FRI",
+            "text": "Team demo · 2:00 PM"
+          }
+        ]
+      }
+    ]
+  }
+}
