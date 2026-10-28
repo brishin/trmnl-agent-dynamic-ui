@@ -9,7 +9,7 @@ npm ci
 npm test
 ```
 
-`npm test` builds the renderer, checks the legacy grid, and renders the six v2 compositions with the design-system readability and overflow checks. Browser checks require Google Chrome at `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`; edit the executable path in the render scripts for another platform. Framework assets are vendored under `vendor/trmnl/` with their source URLs and checksums.
+`npm test` builds the renderer, checks the legacy grid, and renders the nine v2 compositions with the design-system readability and overflow checks. Browser checks require Google Chrome at `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`; edit the executable path in the render scripts for another platform. Framework assets are vendored under `vendor/trmnl/` with their source URLs and checksums.
 
 | Command | Purpose |
 | --- | --- |
@@ -56,6 +56,9 @@ Prefer `schema_version:2`. Select a composition and provide plain text in the pr
 | scoreboard | four metrics, brief |
 | focus | brief, list |
 | dispatch | brief, table, agenda |
+| almanac | month, dates |
+| weekahead | week, brief |
+| countdown | brief, dates |
 
 Validate the complete payload, then call `updatePluginSettingData({id:"522048",merge_variables:SCREEN})`. Send all required top-level fields; MCP does not enforce this custom schema. `width` and `emphasis` are ignored by v2; geometry and hierarchy come from its composition. Use real authorized facts and an honest content timestamp. Included gallery data is fictional.
 

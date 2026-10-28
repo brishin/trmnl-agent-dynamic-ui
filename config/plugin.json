@@ -21,7 +21,10 @@
     "timeline",
     "scoreboard",
     "focus",
-    "dispatch"
+    "dispatch",
+    "almanac",
+    "weekahead",
+    "countdown"
   ],
   "current_sample": {
     "gallery": "examples/v2/gallery.json",

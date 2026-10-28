@@ -232,5 +232,168 @@
         ]
       }
     ]
+  },
+  "07-almanac": {
+    "schema_version": 2,
+    "layout": "almanac",
+    "heading": "The rest of October",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "month",
+        "title": "October 2026",
+        "first_weekday": 4,
+        "days_in_month": 31,
+        "today": 27,
+        "marked": [
+          28,
+          29,
+          31
+        ]
+      },
+      {
+        "type": "dates",
+        "title": "Marked this week",
+        "items": [
+          {
+            "month": "OCT",
+            "day": "28",
+            "weekday": "WED",
+            "until": "Tomorrow",
+            "text": "Mom’s 70th birthday"
+          },
+          {
+            "month": "OCT",
+            "day": "29",
+            "weekday": "THU",
+            "until": "In 2 days",
+            "text": "Dentist · 3:00 PM"
+          },
+          {
+            "month": "OCT",
+            "day": "31",
+            "weekday": "SAT",
+            "until": "Saturday",
+            "text": "Trick-or-treat at 5:30"
+          }
+        ]
+      }
+    ]
+  },
+  "08-weekahead": {
+    "schema_version": 2,
+    "layout": "weekahead",
+    "heading": "The week ahead",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "week",
+        "title": "Week of October 26",
+        "days": [
+          {
+            "weekday": "MON",
+            "day": "26",
+            "items": [
+              "Launch kickoff"
+            ]
+          },
+          {
+            "weekday": "TUE",
+            "day": "27",
+            "today": true,
+            "items": [
+              "Review · 1:30",
+              "Dinner with Sam"
+            ]
+          },
+          {
+            "weekday": "WED",
+            "day": "28",
+            "items": [
+              "Call Mom · 70th"
+            ]
+          },
+          {
+            "weekday": "THU",
+            "day": "29",
+            "items": [
+              "Dentist · 3:00",
+              "QA sign-off"
+            ]
+          },
+          {
+            "weekday": "FRI",
+            "day": "30",
+            "items": [
+              "Team demo · 2:00"
+            ]
+          },
+          {
+            "weekday": "SAT",
+            "day": "31",
+            "items": [
+              "Soccer · 9:00",
+              "Trick-or-treat"
+            ]
+          },
+          {
+            "weekday": "SUN",
+            "day": "1"
+          }
+        ]
+      },
+      {
+        "type": "brief",
+        "title": "Thursday is the crunch.",
+        "text": "Two appointments land on Thursday. Wednesday evening is clear for the call with Mom, and Sunday is wide open."
+      }
+    ]
+  },
+  "09-countdown": {
+    "schema_version": 2,
+    "layout": "countdown",
+    "heading": "Dates worth knowing",
+    "updated_at": "TUE 27 OCT · SAMPLE DATA",
+    "blocks": [
+      {
+        "type": "brief",
+        "title": "Lisbon is first, in 12 days.",
+        "text": "Flights and the apartment are booked. Thanksgiving is at Grandma’s this year, so the turkey is not your problem."
+      },
+      {
+        "type": "dates",
+        "title": "Coming up",
+        "items": [
+          {
+            "month": "NOV",
+            "day": "8",
+            "weekday": "SUN",
+            "until": "In 12 days",
+            "text": "Fly to Lisbon"
+          },
+          {
+            "month": "NOV",
+            "day": "26",
+            "weekday": "THU",
+            "until": "In 30 days",
+            "text": "Thanksgiving at Grandma’s"
+          },
+          {
+            "month": "DEC",
+            "day": "4",
+            "weekday": "FRI",
+            "until": "In 38 days",
+            "text": "Maya’s school play"
+          },
+          {
+            "month": "DEC",
+            "day": "19",
+            "weekday": "SAT",
+            "until": "In 53 days",
+            "text": "Anniversary dinner"
+          }
+        ]
+      }
+    ]
   }
 }

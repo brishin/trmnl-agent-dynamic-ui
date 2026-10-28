@@ -7,7 +7,21 @@ const root=new URL('../',import.meta.url);
 const output=new URL('artifacts/design/',root);
 fs.mkdirSync(output,{recursive:true});
 const read=n=>fs.readFileSync(new URL(n,root),'utf8');
-const gallery=JSON.parse(read('examples/v2/gallery.json'));
+const gallery={...JSON.parse(read('examples/v2/gallery.json')),...JSON.parse(read('examples/v2/use-cases.json'))};
+const W=n=>'Wide Mammoth Words '.repeat(12).slice(0,n);
+const leaf={month:'SEPT',day:'30',weekday:'WED',until:W(12),text:W(36)};
+Object.assign(gallery,{
+'stress-almanac':{schema_version:2,layout:'almanac',heading:W(30),updated_at:'TUE 27 OCT · 7:30 AM · SAMPLE',blocks:[{type:'month',title:W(18),first_weekday:7,days_in_month:31,today:31,marked:[1,2,3,4,5,6,7,8,9,10]},{type:'dates',title:W(32),items:[leaf,leaf,leaf]}]},
+'stress-weekahead':{schema_version:2,layout:'weekahead',heading:W(30),updated_at:'TUE 27 OCT · 7:30 AM · SAMPLE',blocks:[{type:'week',title:W(32),days:Array.from({length:7},(_,i)=>({weekday:'WED',day:'30',today:i===3,items:[W(18),W(18)]}))},{type:'brief',title:W(24),text:W(120)}]},
+'stress-countdown':{schema_version:2,layout:'countdown',heading:W(30),updated_at:'TUE 27 OCT · 7:30 AM · SAMPLE',blocks:[{type:'brief',title:W(32),text:W(120)},{type:'dates',title:W(32),items:[leaf,leaf,leaf,leaf]}]}});
+const reject=(name,edit)=>{const p=structuredClone(gallery[name]);edit(p);assert.throws(()=>validate(p));};
+reject('08-weekahead',p=>p.blocks[0].days[0].today=true);
+reject('08-weekahead',p=>p.blocks.reverse());
+reject('08-weekahead',p=>p.blocks[0].days.push(p.blocks[0].days[0]));
+reject('07-almanac',p=>p.blocks[0].marked.push(32));
+reject('07-almanac',p=>{p.blocks[0].days_in_month=30;p.blocks[0].today=31;});
+reject('07-almanac',p=>p.blocks[1].items.push(p.blocks[1].items[0]));
+reject('09-countdown',p=>p.blocks[1].items[0].day='8th');
 const typography=JSON.parse(read('src/design/tokens.json')).typography;
 const css=read('vendor/trmnl/plugins.css');
 const font=fs.readFileSync(new URL('vendor/trmnl/Inter.ttf',root)).toString('base64');

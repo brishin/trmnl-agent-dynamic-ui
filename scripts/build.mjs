@@ -16,7 +16,7 @@ const css=`/* Shared readability tokens. Generated from src/design/tokens.json. 
 write('design-system.css',css);
 const template=name=>read(name).replace('/* DESIGN_TOKENS */\n',css);
 const schema=JSON.parse(read('src/schemas/v2.json'));delete schema.title;delete schema.$schema;
-const extra={ordered_types:shapes,max_webhook_envelope_utf8_bytes:5000,webhook_envelope:{merge_variables:'SCREEN'},equal_table_row_header_lengths:true,spotlight_first_value_max_chars:3,scoreboard_first_four_values_max_chars:4,focus_first_title_max_chars:24};
+const extra={ordered_types:shapes,max_webhook_envelope_utf8_bytes:5000,webhook_envelope:{merge_variables:'SCREEN'},equal_table_row_header_lengths:true,spotlight_first_value_max_chars:3,scoreboard_first_four_values_max_chars:4,focus_first_title_max_chars:24,week_max_one_today:true,month_today_and_marked_within_days_in_month:true,almanac_max_dates:3,almanac_first_title_max_chars:18,weekahead_brief_title_max_chars:24,weekahead_brief_text_max_chars:120,countdown_brief_text_max_chars:120,countdown_brief_text_max_chars:120,month_first_weekday:'1=Monday..7=Sunday'};
 const contract=read('src/contract.liquid')
  .replace('@@SCREEN_SCHEMA_JSON@@',JSON.stringify(schema))
  .replace('@@EXTRA_VALIDATION_JSON@@',JSON.stringify(extra))

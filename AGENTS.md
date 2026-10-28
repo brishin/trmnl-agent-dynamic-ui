@@ -4,7 +4,7 @@ Private TRMNL plugin; see `README.md` for commands and `docs/design-system.md` f
 
 ## Source and output
 
-- `src/templates/`: v1 grid and six v2 compositions; prefer schema v2.
+- `src/templates/`: v1 grid and nine v2 compositions; prefer schema v2.
 - `src/schemas/`, `src/validate*.mjs`: payload contracts and composition checks.
 - `src/design/tokens.json`: shared typography and spacing.
 - `src/contract.liquid`: compact AI-facing contract; preserve its build placeholders.
