@@ -1,0 +1,45 @@
+{% comment %}Agent Screen v1. Strings are content only. At most two rows, four blocks.{% endcomment %}
+{% assign slots = 0 %}
+{% for block in blocks limit: 4 %}
+  {% if block.width == 'full' %}{% assign odd = slots | modulo: 2 %}{% assign slots = slots | plus: odd | plus: 2 %}{% else %}{% assign slots = slots | plus: 1 %}{% endif %}
+{% endfor %}
+<style>
+
+.agent-screen,.agent-screen *,.agent-footer,.agent-footer * { font-family: "Inter Variable", sans-serif !important; }
+.agent-screen { font-family: "Inter Variable", sans-serif; gap: 14px !important; align-items: stretch !important; justify-content: flex-start !important; }
+.agent-screen .agent-heading { font-size: 27px; line-height: 32px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 0 0 34px; }
+.agent-screen .agent-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); grid-template-rows: repeat(2,minmax(0,1fr)); gap: 12px; flex: 1; width: 100%; min-height: 0; }
+.agent-screen .agent-grid--single { grid-template-rows: minmax(0,1fr); }
+.agent-screen .agent-card { min-width: 0; min-height: 0; border: 1px solid black; border-radius: 8px; padding: 12px 14px; overflow: hidden; display: flex; flex-direction: column; gap: 7px; }
+.agent-screen .agent-card--important { border: 3px solid black; padding: 10px 12px; }
+.agent-screen .agent-card--full { grid-column: span 2; }
+.agent-screen .agent-label { font-size: 16px; line-height: 20px; font-weight: 700; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; flex-shrink: 0; }
+.agent-screen .agent-value { font-size: 44px; line-height: 48px; font-weight: 700; letter-spacing: -1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.agent-screen .agent-text { font-size: 19px; line-height: 25px; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.agent-screen .agent-line { font-size: 17px; line-height: 23px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.agent-screen .agent-time { display: inline-block; width: 82px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
+.agent-screen .agent-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 15px; line-height: 22px; }
+.agent-screen .agent-table tr { height: 25px !important; }
+.agent-screen .agent-table th,.agent-screen .agent-table td { text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; border-bottom: 1px solid black; padding: 1px 4px; }
+</style>
+<div class="layout layout--col agent-screen">
+  <div class="title agent-heading">{{ heading | default: 'Your daily briefing' | truncate: 44 | escape }}</div>
+  {% if schema_version == 1 and slots <= 4 and blocks.size > 0 %}
+  <div class="grid grid--cols-2 agent-grid {% if slots <= 2 %}agent-grid--single{% endif %}">
+    {% for block in blocks limit: 4 %}
+    <div class="col agent-card {% if block.width == 'full' %}col--span-2 agent-card--full{% endif %} {% if block.emphasis == 'important' %}agent-card--important{% endif %}">
+      <span class="label agent-label">{{ block.title | truncate: 32 | escape }}</span>
+      {% case block.type %}
+        {% when 'brief' %}<div class="description agent-text">{{ block.text | truncate: 180 | escape }}</div>
+        {% when 'metric' %}<div class="value agent-value">{{ block.value | truncate: 12 | escape }}</div><div class="description agent-line">{{ block.text | truncate: 64 | escape }}</div>
+        {% when 'list' %}{% for item in block.items limit: 3 %}<div class="agent-line">• {{ item | truncate: 48 | escape }}</div>{% endfor %}
+        {% when 'agenda' %}{% for item in block.items limit: 3 %}<div class="agent-line"><span class="agent-time">{{ item.time | truncate: 8 | escape }}</span>{{ item.text | truncate: 38 | escape }}</div>{% endfor %}
+        {% when 'table' %}<table class="table agent-table"><thead><tr>{% for cell in block.headers limit: 3 %}<th>{{ cell | truncate: 18 | escape }}</th>{% endfor %}</tr></thead><tbody>{% for row in block.rows limit: 3 %}<tr>{% for cell in row limit: 3 %}<td>{{ cell | truncate: 24 | escape }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>
+        {% else %}<div class="description agent-text">Unsupported component. Push a valid v1 screen.</div>
+      {% endcase %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}<div class="description">Screen needs attention. Push a valid v1 payload within the two-row budget.</div>{% endif %}
+</div>
+<div class="title_bar agent-footer"><span class="title">agent dynamic UI</span><span class="instance">{{ updated_at | default: 'Awaiting first update' | truncate: 32 | escape }}</span></div>

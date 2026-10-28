@@ -1,0 +1,265 @@
+{
+  "01-morning": {
+    "schema_version": 1,
+    "heading": "Tuesday, with room to focus",
+    "updated_at": "Sample data · Tue, Oct 27",
+    "blocks": [
+      {
+        "type": "brief",
+        "width": "full",
+        "title": "A clear morning",
+        "emphasis": "important",
+        "text": "You have a quiet stretch until lunch. Finish the launch brief first, then review the two open design decisions before your afternoon meetings."
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Next meeting",
+        "value": "1:30 PM",
+        "text": "Product review · 45 min"
+      },
+      {
+        "type": "list",
+        "width": "half",
+        "title": "Three things that matter",
+        "items": [
+          "Send the launch brief",
+          "Review onboarding changes",
+          "Book a haircut"
+        ]
+      }
+    ]
+  },
+  "02-metrics": {
+    "schema_version": 1,
+    "heading": "A balanced day at a glance",
+    "updated_at": "Sample data · Tue, Oct 27",
+    "blocks": [
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Protected focus time",
+        "value": "2h 45m",
+        "text": "9:00–11:45 AM · notifications off",
+        "emphasis": "important"
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Meetings today",
+        "value": "3",
+        "text": "First at 1:30 PM · last ends 4:15"
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Reading queue",
+        "value": "7",
+        "text": "2 saved articles worth a closer look"
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Walking goal",
+        "value": "6,420",
+        "text": "3,580 steps to reach 10,000"
+      }
+    ]
+  },
+  "03-agenda": {
+    "schema_version": 1,
+    "heading": "Your afternoon, in order",
+    "updated_at": "Sample data · Tue, Oct 27",
+    "blocks": [
+      {
+        "type": "agenda",
+        "width": "full",
+        "title": "Today’s schedule",
+        "items": [
+          {
+            "time": "1:30 PM",
+            "text": "Product review · launch scope"
+          },
+          {
+            "time": "2:45 PM",
+            "text": "Design critique · onboarding"
+          },
+          {
+            "time": "4:00 PM",
+            "text": "Weekly check-in · 15 min"
+          }
+        ]
+      },
+      {
+        "type": "brief",
+        "width": "half",
+        "title": "Before the review",
+        "text": "Bring the launch checklist and a recommendation for the remaining scope decision.",
+        "emphasis": "important"
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Next free window",
+        "value": "3:15 PM",
+        "text": "45 minutes for follow-ups"
+      }
+    ]
+  },
+  "04-projects": {
+    "schema_version": 1,
+    "heading": "What needs a nudge",
+    "updated_at": "Sample data · Tue, Oct 27",
+    "blocks": [
+      {
+        "type": "table",
+        "width": "full",
+        "title": "This week’s project pulse",
+        "headers": [
+          "Project",
+          "Next step",
+          "Due"
+        ],
+        "rows": [
+          [
+            "Onboarding",
+            "Review copy",
+            "Wed, Oct 28"
+          ],
+          [
+            "Release notes",
+            "Final approval",
+            "Thu, Oct 29"
+          ],
+          [
+            "Launch brief",
+            "Send draft",
+            "Today"
+          ]
+        ],
+        "emphasis": "important"
+      },
+      {
+        "type": "list",
+        "width": "half",
+        "title": "Waiting on others",
+        "items": [
+          "Design feedback from Maya",
+          "QA sign-off on login flow",
+          "Final launch date from Alex"
+        ]
+      },
+      {
+        "type": "metric",
+        "width": "half",
+        "title": "Unblocked tasks",
+        "value": "4",
+        "text": "Start with the launch brief"
+      }
+    ]
+  },
+  "05-mixed": {
+    "schema_version": 1,
+    "heading": "A little work, a little life",
+    "updated_at": "Sample data · Tue, Oct 27",
+    "blocks": [
+      {
+        "type": "agenda",
+        "width": "half",
+        "title": "Tonight",
+        "items": [
+          {
+            "time": "6:15 PM",
+            "text": "Strength class"
+          },
+          {
+            "time": "7:30 PM",
+            "text": "Dinner with Sam"
+          },
+          {
+            "time": "9:00 PM",
+            "text": "Read and wind down"
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "width": "half",
+        "title": "On the way home",
+        "items": [
+          "Pick up the dry cleaning",
+          "Buy coffee beans",
+          "Return the library book"
+        ]
+      },
+      {
+        "type": "table",
+        "width": "half",
+        "title": "Home essentials",
+        "headers": [
+          "Item",
+          "Status"
+        ],
+        "rows": [
+          [
+            "Laundry",
+            "Fold tonight"
+          ],
+          [
+            "Plants",
+            "Water Thursday"
+          ],
+          [
+            "Groceries",
+            "List ready"
+          ]
+        ]
+      },
+      {
+        "type": "brief",
+        "width": "half",
+        "title": "Make the evening easy",
+        "text": "Pack your gym bag before the last meeting. Leave by 5:45 so you have time to walk.",
+        "emphasis": "important"
+      }
+    ]
+  },
+  "06-two-full": {
+    "schema_version": 1,
+    "heading": "Close the day with a clean slate",
+    "updated_at": "Sample data · Tue, Oct 27",
+    "blocks": [
+      {
+        "type": "brief",
+        "width": "full",
+        "title": "A good stopping point",
+        "text": "The launch brief is sent and the review notes are captured. Leave the final copy pass for tomorrow’s first focus block.",
+        "emphasis": "important"
+      },
+      {
+        "type": "list",
+        "width": "full",
+        "title": "Set up tomorrow",
+        "items": [
+          "9:00 AM · final pass on onboarding copy",
+          "Send the two follow-up questions from review",
+          "Keep the first hour free of meetings"
+        ]
+      }
+    ]
+  },
+  "07-single": {
+    "schema_version": 1,
+    "heading": "One thing at a time",
+    "updated_at": "Sample data · Tue, Oct 27",
+    "blocks": [
+      {
+        "type": "brief",
+        "width": "full",
+        "title": "Your next 45 minutes",
+        "text": "Finish the recommendation section of the launch brief. You already have the supporting notes; choose a direction and get the draft out.",
+        "emphasis": "important"
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+node_modules/
+.DS_Store
+# Build products; npm run build regenerates these.
+/full.liquid
+/AI-CONTRACT.liquid
+/design-system.css
+# Local previews, screenshots and test/verification reports.
+/*.html
+/*.png
+/v2/*.html
+/v2/*.png
+/*-results.json
+/v2/*-results.json
+/*verification.json
+/v2/verification.json
+# Per-screen JSON is generated from the canonical galleries.
+/[0-9][0-9]-*.json
+/v2/[0-9][0-9]-*.json
+/single.json
+/stress.json

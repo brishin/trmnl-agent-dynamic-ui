@@ -1,0 +1,41 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import {Liquid} from 'liquidjs';
+import {chromium} from 'playwright';
+import {validate} from './validate.mjs';
+const root=new URL('./',import.meta.url);
+const read=name=>fs.readFileSync(new URL(name,root),'utf8');
+const engine=new Liquid();
+const template=read('full.liquid');
+const sample=JSON.parse(read('sample.json'));
+let checks=0;
+function reject(edit){const p=structuredClone(sample);edit(p);assert.throws(()=>validate(p));checks++;}
+reject(p=>p.blocks[0].type='html');reject(p=>p.blocks[0].text='x'.repeat(181));reject(p=>p.blocks.push(p.blocks[0]));reject(p=>p.blocks[1].width='giant');reject(p=>p.blocks[0].html='<script>');reject(p=>p.schema_version=2);
+reject(p=>p.blocks=[{type:'table',width:'half',title:'Bad',headers:['A','B'],rows:[['A','B','C']]}]);
+reject(p=>p.blocks=[{type:'metric',width:'half',title:'A',value:'1',text:'a'},{type:'brief',width:'full',title:'B',text:'b'},{type:'metric',width:'half',title:'C',value:'2',text:'c'}]);
+const escaped=structuredClone(sample);escaped.blocks[0].text='<script>alert(1)</script> {{ 7 | times: 7 }}';
+const html=await engine.parseAndRender(template,escaped);assert(!html.includes('<script>alert'));assert(html.includes('&lt;script&gt;'));assert(html.includes('{{ 7 | times: 7 }}'));checks++;
+const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+const page=await browser.newPage({viewport:{width:800,height:480},deviceScaleFactor:1});
+const font=fs.readFileSync(new URL('assets/Inter.ttf',root)).toString('base64');
+const css=fs.readFileSync(new URL('assets/plugins.css',root),'utf8');
+const js=fs.readFileSync(new URL('assets/plugins.js',root),'utf8');
+await page.route('**/*',route=>route.abort());
+const cases={sample,metrics:JSON.parse(read('metrics.json')),agenda:JSON.parse(read('agenda.json')),single:{...sample,blocks:[sample.blocks[0]]},stress:{...sample,heading:'M'.repeat(44),updated_at:'M'.repeat(32),blocks:[{type:'brief',width:'full',title:'M'.repeat(32),text:'W'.repeat(180)},{type:'table',width:'half',title:'Table at its limits',headers:['M'.repeat(18),'N'.repeat(18),'O'.repeat(18)],rows:Array.from({length:3},()=>['W'.repeat(24),'W'.repeat(24),'W'.repeat(24)])},{type:'agenda',width:'half',title:'Agenda at its limits',items:Array.from({length:3},()=>({time:'12:30 PM',text:'W'.repeat(38)}))}]}};
+Object.assign(cases,JSON.parse(read('gallery.json')));
+const report=[];
+for(const [name,payload] of Object.entries(cases)){
+ validate(payload);
+ fs.writeFileSync(new URL(`${name}.json`,root),JSON.stringify(payload,null,2)+"\n");
+ const markup=await engine.parseAndRender(template,payload);
+ const doc=`<!doctype html><html><head><meta charset="utf-8"><style>${css}@font-face{font-family:"Inter Variable";font-style:normal;font-weight:100 900;src:url(data:font/ttf;base64,${font})} .title_bar{font-family:"Inter Variable",sans-serif}</style></head><body class="environment trmnl"><div class="screen"><div class="view view--full">${markup}</div></div><script>${js}</script></body></html>`;
+ fs.writeFileSync(new URL(`${name}.html`,root),`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="assets/plugins.css"><style>@font-face{font-family:"Inter Variable";font-style:normal;font-weight:100 900;src:url(assets/Inter.ttf)}</style></head><body class="environment trmnl"><div class="screen"><div class="view view--full">${markup}</div></div><script src="assets/plugins.js"></script></body></html>`);
+ await page.setContent(doc,{waitUntil:'load'});await page.evaluate(()=>document.fonts.ready);
+ const result=await page.evaluate(()=>{const view=document.querySelector('.view'),grid=document.querySelector('.agent-grid');return {view:{width:view.offsetWidth,height:view.offsetHeight},cards:[...document.querySelectorAll('.agent-card')].map(e=>({width:e.offsetWidth,height:e.offsetHeight,overflow:e.scrollHeight>e.clientHeight+1})),gridOverflow:grid.scrollHeight>grid.clientHeight+1,footerBottom:document.querySelector('.title_bar').getBoundingClientRect().bottom};});
+ console.log(name,JSON.stringify(result));await page.screenshot({path:new URL(`${name}.png`,root).pathname});
+ assert(result.view.width>=760 && result.view.width<=800);assert(result.view.height>=440 && result.view.height<=480);assert.equal(result.gridOverflow,false);assert(result.cards.every(c=>!c.overflow));assert(result.footerBottom<=480);
+ await page.screenshot({path:new URL(`${name}.png`,root).pathname});report.push({name,...result});checks++;
+}
+await browser.close();
+fs.writeFileSync(new URL('test-results.json',root),JSON.stringify({passed:true,checks,cases:report,note:'Long lines are intentionally ellipsized; brief text clamps at 3 lines. Preview uses installed Chrome, TRMNL Framework 3.4.0, 800x480.'},null,2));
+console.log(JSON.stringify({passed:true,checks,cases:report},null,2));
