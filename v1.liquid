@@ -4,6 +4,13 @@
   {% if block.width == 'full' %}{% assign odd = slots | modulo: 2 %}{% assign slots = slots | plus: odd | plus: 2 %}{% else %}{% assign slots = slots | plus: 1 %}{% endif %}
 {% endfor %}
 <style>
+/* Shared readability tokens. Generated from design-system.json. */
+.dui,.agent-screen,.agent-footer {
+ --ui-text-min:16px; --ui-meta-size:16px; --ui-meta-weight:700; --ui-meta-leading:22px;
+ --ui-body-size:18px; --ui-body-weight:400; --ui-body-leading:26px;
+ --ui-section-size:18px; --ui-section-weight:700; --ui-section-leading:24px;
+ --ui-ink:#000000; --ui-paper:#ffffff; --ui-space:4px;
+}
 
 .agent-screen,.agent-screen *,.agent-footer,.agent-footer * { font-family: "Inter Variable", sans-serif !important; }
 .agent-screen { font-family: "Inter Variable", sans-serif; gap: 14px !important; align-items: stretch !important; justify-content: flex-start !important; }
@@ -18,9 +25,10 @@
 .agent-screen .agent-text { font-size: 19px; line-height: 25px; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
 .agent-screen .agent-line { font-size: 17px; line-height: 23px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 .agent-screen .agent-time { display: inline-block; width: 82px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; vertical-align: bottom; }
-.agent-screen .agent-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 15px; line-height: 22px; }
+.agent-screen .agent-table { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 16px; font-weight: 600; line-height: 22px; }
 .agent-screen .agent-table tr { height: 25px !important; }
 .agent-screen .agent-table th,.agent-screen .agent-table td { text-align: left; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; border-bottom: 1px solid black; padding: 1px 4px; }
+.agent-footer,.agent-footer * { font-size:16px !important; font-weight:700 !important; line-height:22px !important; }
 </style>
 <div class="layout layout--col agent-screen">
   <div class="title agent-heading">{{ heading | default: 'Your daily briefing' | truncate: 44 | escape }}</div>

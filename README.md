@@ -6,6 +6,6 @@ Run `npm ci`, then `npm test`. `npm run build` copies `v1.liquid` into generated
 
 This commit reconstructs the original grid stage. See HISTORY.md for the reconstructed-history policy. All numbered examples, browser previews and test reports are generated and ignored.
 
-## Six compositions
+## Readability system
 
-Schema v2 selects editorial, spotlight, timeline, scoreboard, focus, or dispatch. Each fixes the block order; see `v2/validate.mjs` and `v2/gallery.json`. These layouts replace repeated cards with open typography, rules and asymmetric columns.
+See `DESIGN-SYSTEM.md` and `design-system.json`. Text must be at least 16px; small text must be at least weight 600. The v2 footer is removed. `npm test` runs both layout suites, including computed typography checks.

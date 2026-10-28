@@ -1,24 +1,31 @@
 <style>
+/* Shared readability tokens. Generated from design-system.json. */
+.dui,.agent-screen,.agent-footer {
+ --ui-text-min:16px; --ui-meta-size:16px; --ui-meta-weight:700; --ui-meta-leading:22px;
+ --ui-body-size:18px; --ui-body-weight:400; --ui-body-leading:26px;
+ --ui-section-size:18px; --ui-section-weight:700; --ui-section-leading:24px;
+ --ui-ink:#000000; --ui-paper:#ffffff; --ui-space:4px;
+}
 
 .dui,.dui * {box-sizing:border-box;font-family:Arial,Helvetica,sans-serif!important;}
 .dui {height:100%;width:100%;padding:20px 24px 12px;display:flex;flex-direction:column;color:#000;overflow:hidden;}
 .dui-head {display:flex;justify-content:space-between;align-items:center;border-top:5px solid #000;padding-top:10px;gap:15px;flex:0 0 36px;}
-.dui-heading {font-size:13px;line-height:17px;font-weight:750;letter-spacing:1px;text-transform:uppercase;}
-.dui-date {font-size:10px;letter-spacing:1px;white-space:nowrap;}
+.dui-heading {font-size:var(--ui-meta-size);line-height:var(--ui-meta-leading);font-weight:750;letter-spacing:1px;text-transform:uppercase;}
+.dui-date {font-size:var(--ui-meta-size);font-weight:var(--ui-meta-weight);line-height:var(--ui-meta-leading);letter-spacing:0;white-space:nowrap;}
 .dui-main {flex:1;min-height:0;display:grid;gap:20px;margin-top:22px;margin-bottom:16px;}
 .dui-block {min-width:0;min-height:0;overflow:hidden;}
-.dui-label {font-size:12px;line-height:16px;font-weight:750;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.dui-label {font-size:var(--ui-meta-size);line-height:var(--ui-meta-leading);font-weight:750;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
 .dui-body {font-size:19px;line-height:1.4;overflow-wrap:anywhere;}
 .dui-value {font-size:60px;font-weight:780;line-height:1.05;letter-spacing:-3px;margin:0 0 8px;white-space:nowrap;}
-.dui-sub {font-size:13px;line-height:19px;}
+.dui-sub {font-size:var(--ui-meta-size);font-weight:var(--ui-meta-weight);line-height:var(--ui-meta-leading);}
 .dui-list {display:flex;flex-direction:column;gap:12px;}
 .dui-item {font-size:17px;line-height:23px;display:flex;gap:12px;}
-.dui-index {font-size:11px;font-weight:700;line-height:21px;flex:0 0 18px;}
+.dui-index {font-size:var(--ui-meta-size);font-weight:var(--ui-meta-weight);line-height:23px;flex:0 0 23px;}
 .dui-event {display:grid;grid-template-columns:85px 1fr;gap:10px;padding:9px 0;border-top:1px solid #000;align-items:baseline;}
 .dui-time {font-size:18px;font-weight:750;line-height:23px;}
 .dui-event-text {font-size:17px;line-height:23px;}
-.dui-table {width:100%;table-layout:fixed;border-collapse:collapse;font-size:14px;line-height:19px;}
-.dui-table th {text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.8px;padding:0 5px 7px 0;border-bottom:2px solid #000;}
+.dui-table {width:100%;table-layout:fixed;border-collapse:collapse;font-size:var(--ui-meta-size);font-weight:600;line-height:22px;}
+.dui-table th {text-align:left;font-size:var(--ui-meta-size);font-weight:700;text-transform:uppercase;letter-spacing:.8px;padding:0 5px 7px 0;border-bottom:2px solid #000;}
 .dui-table td {padding:10px 5px 10px 0;border-bottom:1px solid #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 /* An editorial lead with a narrow supporting rail. */
 .dui--editorial .dui-main {grid-template-columns:1.65fr 1fr;grid-template-rows:135px 1fr;gap:20px 30px;}
@@ -31,7 +38,7 @@
 .dui--spotlight .dui-block:first-child {grid-row:span 2;background:#000;color:#fff;padding:22px 16px;display:flex;flex-direction:column;justify-content:space-between;}
 .dui--spotlight .dui-block:first-child .dui-value {font-size:130px;line-height:1;letter-spacing:-5px;}
 .dui--spotlight .dui-block:nth-child(2) .dui-label {font-size:25px;letter-spacing:-.6px;text-transform:none;line-height:1.15;}
-.dui--spotlight .dui-block:nth-child(2) .dui-body {font-size:16px;line-height:1.4;}
+.dui--spotlight .dui-block:nth-child(2) .dui-body {font-size:var(--ui-body-size);line-height:var(--ui-body-leading);}
 .dui--spotlight .dui-event {padding:6px 0;}
 /* A time-led composition with a checklist in the margin. */
 .dui--timeline .dui-main {grid-template-columns:1.7fr 1fr;gap:38px;margin-top:28px;}
@@ -61,9 +68,8 @@
 .dui--dispatch .dui-main {grid-template-columns:1.35fr 1fr;grid-template-rows:130px 1fr;gap:18px 28px;}
 .dui--dispatch .dui-block:first-child {grid-column:1/-1;border-bottom:3px solid #000;padding-bottom:15px;}
 .dui--dispatch .dui-block:first-child .dui-label {font-family:Georgia,serif!important;font-size:32px;line-height:36px;text-transform:none;letter-spacing:-.8px;font-weight:400;margin-bottom:9px;}
-.dui--dispatch .dui-block:first-child .dui-body {font-size:16px;line-height:1.4;}
+.dui--dispatch .dui-block:first-child .dui-body {font-size:var(--ui-body-size);line-height:var(--ui-body-leading);}
 .dui--dispatch .dui-block:last-child {border-left:1px solid #000;padding-left:22px;}
-.dui-footer {display:flex;justify-content:space-between;flex:0 0 18px;align-items:flex-end;border-top:1px solid #000;padding-top:7px;font-size:9px;letter-spacing:1.1px;text-transform:uppercase;}
 </style>
 <div class="dui dui--{{ layout | escape }}">
 <header class="dui-head"><span class="dui-heading">{{ heading | truncate:44 | escape }}</span><span class="dui-date">{{ updated_at | truncate:32 | escape }}</span></header>
@@ -77,5 +83,5 @@
 {% when 'agenda' %}<div class="dui-events">{% for item in block.items limit:3 %}<div class="dui-event"><span class="dui-time">{{ item.time | truncate:8 | escape }}</span><span class="dui-event-text">{{ item.text | truncate:38 | escape }}</span></div>{% endfor %}</div>
 {% when 'table' %}<table class="dui-table"><thead><tr>{% for cell in block.headers limit:3 %}<th>{{ cell | truncate:18 | escape }}</th>{% endfor %}</tr></thead><tbody>{% for row in block.rows limit:3 %}<tr>{% for cell in row limit:3 %}<td>{{ cell | truncate:24 | escape }}</td>{% endfor %}</tr>{% endfor %}</tbody></table>
 {% endcase %}</section>{% endfor %}
-</main><footer class="dui-footer"><span>agent dynamic UI</span><span>{{ layout | escape }} / personal edition</span></footer>
+</main>
 </div>

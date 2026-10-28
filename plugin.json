@@ -1,0 +1,31 @@
+{
+  "plugin_setting_id": "522048",
+  "plugin_id": 37,
+  "name": "agent dynamic UI",
+  "strategy": "webhook",
+  "framework_version": "3.4.0",
+  "refresh_interval_minutes": 1440,
+  "supported_layouts": [
+    "markup_full"
+  ],
+  "device_model": "v2",
+  "daily_generation_scheduled": false,
+  "playlist_modified": true,
+  "schema_versions": [
+    1,
+    2
+  ],
+  "compositions": [
+    "editorial",
+    "spotlight",
+    "timeline",
+    "scoreboard",
+    "focus",
+    "dispatch"
+  ],
+  "current_sample": "v2/01-editorial.json",
+  "device_id": 73063,
+  "playlist_item_id": 884318,
+  "previous_weather_item_id": 884208,
+  "previous_weather_item_hidden": true
+}

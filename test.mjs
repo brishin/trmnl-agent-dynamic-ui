@@ -7,6 +7,7 @@ const root=new URL('./',import.meta.url);
 const read=name=>fs.readFileSync(new URL(name,root),'utf8');
 const engine=new Liquid();
 const template=read('full.liquid');
+const typography=JSON.parse(read('design-system.json')).typography;
 const sample=JSON.parse(read('sample.json'));
 let checks=0;
 function reject(edit){const p=structuredClone(sample);edit(p);assert.throws(()=>validate(p));checks++;}
@@ -31,6 +32,8 @@ for(const [name,payload] of Object.entries(cases)){
  const doc=`<!doctype html><html><head><meta charset="utf-8"><style>${css}@font-face{font-family:"Inter Variable";font-style:normal;font-weight:100 900;src:url(data:font/ttf;base64,${font})} .title_bar{font-family:"Inter Variable",sans-serif}</style></head><body class="environment trmnl"><div class="screen"><div class="view view--full">${markup}</div></div><script>${js}</script></body></html>`;
  fs.writeFileSync(new URL(`${name}.html`,root),`<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="assets/plugins.css"><style>@font-face{font-family:"Inter Variable";font-style:normal;font-weight:100 900;src:url(assets/Inter.ttf)}</style></head><body class="environment trmnl"><div class="screen"><div class="view view--full">${markup}</div></div><script src="assets/plugins.js"></script></body></html>`);
  await page.setContent(doc,{waitUntil:'load'});await page.evaluate(()=>document.fonts.ready);
+ const textStyles=await page.evaluate(()=>[...document.querySelectorAll('.agent-screen *,.agent-footer *')].filter(e=>[...e.childNodes].some(n=>n.nodeType===3&&n.textContent.trim())).map(e=>{const s=getComputedStyle(e);return {text:e.textContent.slice(0,30),size:parseFloat(s.fontSize),weight:parseFloat(s.fontWeight)};}));
+ assert(textStyles.every(t=>t.size>=typography.minimum_font_size_px && (t.size>typography.small_text_max_size_px || t.weight>=typography.small_text_min_weight)),'Legacy readability floor violated: '+JSON.stringify(textStyles));
  const result=await page.evaluate(()=>{const view=document.querySelector('.view'),grid=document.querySelector('.agent-grid');return {view:{width:view.offsetWidth,height:view.offsetHeight},cards:[...document.querySelectorAll('.agent-card')].map(e=>({width:e.offsetWidth,height:e.offsetHeight,overflow:e.scrollHeight>e.clientHeight+1})),gridOverflow:grid.scrollHeight>grid.clientHeight+1,footerBottom:document.querySelector('.title_bar').getBoundingClientRect().bottom};});
  console.log(name,JSON.stringify(result));await page.screenshot({path:new URL(`${name}.png`,root).pathname});
  assert(result.view.width>=760 && result.view.width<=800);assert(result.view.height>=440 && result.view.height<=480);assert.equal(result.gridOverflow,false);assert(result.cards.every(c=>!c.overflow));assert(result.footerBottom<=480);
