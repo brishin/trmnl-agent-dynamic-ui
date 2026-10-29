@@ -9,29 +9,12 @@
     "markup_full"
   ],
   "device_model": "v2",
+  "content_mode": "markup",
   "daily_generation_scheduled": false,
   "playlist_modified": true,
-  "schema_versions": [
-    1,
-    2
-  ],
-  "compositions": [
-    "editorial",
-    "spotlight",
-    "timeline",
-    "scoreboard",
-    "focus",
-    "dispatch",
-    "almanac",
-    "weekahead",
-    "countdown",
-    "outlook",
-    "trend",
-    "board"
-  ],
   "current_sample": {
-    "gallery": "examples/v2/gallery.json",
-    "key": "01-editorial"
+    "note": "Device still shows the v2 editorial sample until a screen is uploaded with writeMarkup",
+    "next_example": "examples/screens/editorial.html"
   },
   "device_id": 73063,
   "playlist_item_id": 884318,

@@ -1,6 +1,6 @@
 # Vendored weather icons
 
-Weather Icons by Erik Flowers (https://erikflowers.github.io/weather-icons/), licensed under the SIL Open Font License 1.1. The v2 renderer loads these from the URLs below, as the TRMNL Weather Glance plugin does; `tests/design.mjs` serves these pinned copies in place of the network. Do not edit these files.
+Weather Icons by Erik Flowers (https://erikflowers.github.io/weather-icons/), licensed under the SIL Open Font License 1.1. Screens load these from the URLs below, as the TRMNL Weather Glance plugin does; `scripts/render.mjs` (used by `npm run check` and `npm test`) serves these pinned copies in place of the network. Do not edit these files.
 
 | File | Original URL | SHA-256 |
 | --- | --- | --- |

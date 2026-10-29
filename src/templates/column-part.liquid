@@ -1,7 +1,0 @@
-{% case p.kind %}{% when 'text' %}<span class="dui-part">{% if p.icon %}@@WX(p.icon|dui-wx dui-wx--inline)@@{% endif %}{{ p.text | truncate:60 | escape }}</span>
-{% when 'event' %}<span class="dui-part"><b class="dui-part-time">{{ p.time | truncate:8 | escape }}</b>{% if p.icon %}@@WX(p.icon|dui-wx dui-wx--inline)@@{% endif %}{{ p.text | truncate:48 | escape }}</span>
-{% when 'metric' %}<span class="dui-part"><b class="dui-part-value">{{ p.value | truncate:5 | escape }}{% if p.icon %}@@WX(p.icon|dui-wx)@@{% endif %}</b>{{ p.text | truncate:24 | escape }}</span>
-{% when 'list' %}<span class="dui-part dui-part-list">{% for e in p.items limit:3 %}<span>{{ e | truncate:24 | escape }}</span>{% endfor %}</span>
-{% when 'badge' %}<span class="dui-part-badge">{{ p.text | truncate:12 | escape }}</span>
-{% when 'range' %}{% if k > 0 %}{% assign x = p.low | minus: lo | times: k %}{% assign w = p.high | minus: p.low | times: k %}{% else %}{% assign x = 0 %}{% assign w = 100 %}{% endif %}@@RANGE_LEVEL_CASE@@<span class="dui-part"><b>{{ p.low }}–{{ p.high }}{{ block.unit | truncate:4 | escape }}</b><span class="dui-part-bar"><span class="bg--gray-{{ shade }}" style="left:{{ x | round:1 }}%;width:{{ w | round:1 }}%"></span></span></span>
-{% endcase %}
