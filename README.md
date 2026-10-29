@@ -46,4 +46,8 @@ vendor/                       pinned TRMNL framework assets and weather icons
 
 Merge variables are no longer used; each update replaces the markup. Agents without the repository read the markup, replace only the text between `<!-- SCREEN:BEGIN -->` and `<!-- SCREEN:END -->`, and follow the embedded `AGENT_DYNAMIC_UI_CONTRACT/2`. Use real, authorized facts and an honest content time. Included examples are fictional.
 
-Local 800×480 renders differ from device-model proportions, and a server preview doesn't verify the physical screen. Full-screen layout only; mashup sizes aren't implemented. The device still shows the last v2 screen until a new markup is uploaded. No daily content-generation automation is configured.
+Local 800×480 renders differ from device-model proportions, and a server preview doesn't verify the physical screen. Full-screen layout only; mashup sizes aren't implemented. The installed screen is the editorial example (`examples/screens/editorial.html`). No daily content-generation automation is configured.
+
+## License
+
+MIT; see [LICENSE](LICENSE). Vendored third-party assets keep their own licenses: the TRMNL Framework in `vendor/trmnl/` (open source, listed as MIT) and the Inter font and Weather Icons in `vendor/` (SIL Open Font License 1.1).

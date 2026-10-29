@@ -13,8 +13,8 @@
   "daily_generation_scheduled": false,
   "playlist_modified": true,
   "current_sample": {
-    "note": "Device still shows the v2 editorial sample until a screen is uploaded with writeMarkup",
-    "next_example": "examples/screens/editorial.html"
+    "screen": "examples/screens/editorial.html",
+    "uploaded": "2026-10-29"
   },
   "device_id": 73063,
   "playlist_item_id": 884318,
