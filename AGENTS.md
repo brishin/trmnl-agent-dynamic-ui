@@ -4,7 +4,7 @@ Private TRMNL plugin; see `README.md` for commands and `docs/design-system.md` f
 
 ## Source and output
 
-- `src/design/tokens.json`: type scale, spacing, rules, fills and limits; `src/design/weather.json`: conditions, icons, WMO codes.
+- `src/design/tokens.json`: type scale, spacing, rules, fills and limits; `src/design/weather.json`: conditions, icons, WMO codes. `src/pixel.mjs` and `npm run pixel` draw 1-bit `p-image` pictures; `examples/pixel/` holds reusable drawings.
 - `src/screen.mjs`: generates the stylesheet and class list from tokens, defines the markup policy and `compose()`.
 - `src/contract.liquid`: compact AI-facing contract embedded in the uploaded markup; preserve its build placeholders.
 - `scripts/`: build, check, compose and the shared Chrome render harness. `examples/screens/`, `tests/`, `docs/`: canonical screens, checks, documentation.

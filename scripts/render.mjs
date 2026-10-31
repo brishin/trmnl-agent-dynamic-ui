@@ -32,9 +32,21 @@ function lint({policy,ty}){
     else if(!/^-?\d+(\.\d+)?$/.test(value)||+value<range[0]||+value>range[1])errors.push(name+' must be a number from '+range[0]+' to '+range[1]+', not "'+value+'"');
    }
   }
-  if(tag==='img'&&!policy.icon_sources.includes(e.getAttribute('src')))errors.push('Image source '+e.getAttribute('src')+' is not a weather icon');
-  if(tag==='img'&&!e.classList.contains('i-icon'))errors.push('Icons need class i-icon');
+  if(tag==='img'){
+   const src=e.getAttribute('src')||'',pi=policy.pixel_images;
+   if(src.startsWith(pi.src_prefix)){
+    if(!e.classList.contains('p-image'))errors.push('Pixel images need class p-image');
+    const bytes=Math.floor((src.length-pi.src_prefix.length)*3/4);
+    if(bytes>pi.max_png_bytes)errors.push('Pixel image is '+bytes+' bytes; keep it under '+pi.max_png_bytes);
+   }else{
+    if(!policy.icon_sources.includes(src))errors.push('Image source '+src.slice(0,80)+' is not a weather icon or a PNG data URI');
+    if(!e.classList.contains('i-icon'))errors.push('Icons need class i-icon');
+    if(e.classList.contains('p-image'))errors.push('p-image needs a PNG data URI source');
+   }
+  }
  }
+ const pixels=screen.querySelectorAll('img.p-image').length;
+ if(pixels>policy.pixel_images.max_per_screen)errors.push(pixels+' pixel images; use at most '+policy.pixel_images.max_per_screen);
  const stamp=screen.querySelector('[data-updated]');
  if(!stamp||!stamp.textContent.trim())errors.push('One element needs data-updated with the honest content time');
  const inverse=all.filter(e=>e.classList.contains('s-inverse')&&!e.matches('.s-ring,.s-badge')&&!e.parentElement.closest('.s-inverse'));
@@ -45,9 +57,20 @@ function lint({policy,ty}){
  return {errors,warnings};
 }
 
-// Runs in the page: readability, ink, icon and overflow errors.
-function measure({ty}){
+// Runs in the page: readability, ink, icon, pixel image and overflow errors.
+function measure({ty,policy}){
  const errors=[],screen=document.querySelector('.dui'),box=screen.getBoundingClientRect();
+ // A pixel image must be pure black and white and shown whole at its own size.
+ function pixelImage(img,limits){
+  const w=img.naturalWidth,h=img.naturalHeight,name='Pixel image '+w+'x'+h;
+  if(w>limits.max_width_px||h>limits.max_height_px)return [name+' is larger than '+limits.max_width_px+'x'+limits.max_height_px];
+  if(img.clientWidth<w||img.clientHeight<h)return [name+' is cropped to '+img.clientWidth+'x'+img.clientHeight+'; give it room'];
+  const c=document.createElement('canvas');c.width=w;c.height=h;
+  const g=c.getContext('2d');g.drawImage(img,0,0);
+  const d=g.getImageData(0,0,w,h).data;
+  for(let i=0;i<d.length;i+=4)if(d[i+3]!==255||d[i]!==d[i+1]||d[i]!==d[i+2]||(d[i]!==0&&d[i]!==255))return [name+' must use only opaque black and white pixels'];
+  return [];
+ }
  const where=e=>e.tagName.toLowerCase()+(e.className?'.'+[...e.classList].join('.'):'')+(e.textContent.trim()?' "'+e.textContent.trim().slice(0,30)+'"':'');
  for(const e of screen.querySelectorAll('*')){
   const s=getComputedStyle(e);
@@ -56,7 +79,8 @@ function measure({ty}){
    if(size<ty.minimum_font_size_px||(size<=ty.small_text_max_size_px&&weight<ty.small_text_min_weight))errors.push('Text below the readability floor ('+size+'px/'+weight+'): '+where(e));
    if(s.color!=='rgb(0, 0, 0)'&&s.color!=='rgb(255, 255, 255)')errors.push('Text must be black or white, not '+s.color+': '+where(e));
   }
-  if(e.tagName==='IMG'&&!(e.complete&&e.naturalWidth>0))errors.push('Icon did not load: '+e.getAttribute('src'));
+  if(e.tagName==='IMG'&&!(e.complete&&e.naturalWidth>0))errors.push('Image did not load: '+e.getAttribute('src').slice(0,80));
+  else if(e.matches('img.p-image'))errors.push(...pixelImage(e,policy.pixel_images));
   const r=e.getBoundingClientRect();
   if(r.width&&r.height&&(r.left<box.left-1||r.right>box.right+1||r.top<box.top-1||r.bottom>box.bottom+1))errors.push('Outside the screen: '+where(e));
   // Clipping containers report content that no longer fits; glyph ink past a line box is not overflow.

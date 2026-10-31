@@ -11,6 +11,7 @@ Pick by asking **what is the one thing**, and **how many peers sit beside it**:
 | One number | context + a few times | spotlight, split, countdown |
 | 3–5 equal numbers | an interpretation | scoreboard, cover |
 | A schedule | a side note | timeline, spotlight |
+| Today plus the next few days | weather and what to wear | agenda |
 | People, projects, days | none | board, week |
 | Dates in a month | the events behind them | month |
 | A quantity over time | an interpretation | outlook, bands |
@@ -63,6 +64,10 @@ Pick by asking **what is the one thing**, and **how many peers sit beside it**:
 ## Countdown: number beside a headline
 
 `examples/screens/countdown.html`. An `f-xxl` number inline with a serif headline and a sentence, centered vertically, over a footer row of upcoming dates with "in N days" labels. Use it for trips, deadlines and birthdays.
+
+## Agenda: today large, four days as rows
+
+`examples/screens/agenda.html`. No header: today's column (`l-grow-1`) opens with the `data-updated` stamp and icon, an `f-xl` high with the low beside it, events, and the wear advice pinned to the bottom by `l-spacer`: two line-art characters (`p-image`, from `examples/pixel/character.mjs`) captioned "Fri tee" and "Sat jacket". The `l-grow-2` rail holds four `d-thin` rows: date over an `i-m` icon (`l-grow-2`), `f-m` high over a `t-nowrap` low (`l-grow-3`), events (`l-grow-9`). Holidays are `t-label`, confirmed events bold with a time, maybes in `<em>`. Each smaller day fits 3 lines of ~30 characters; today fits 2 lines above the characters, or 4–5 with one sentence of advice instead. Give a busier row a larger `l-grow-*` than the rest.
 
 ## Outlook: pills on a shared scale
 

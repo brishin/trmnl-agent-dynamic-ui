@@ -15,6 +15,7 @@ npm test
 | --- | --- |
 | `npm run build` | Generate `dist/screen.css` and `dist/AI-CONTRACT.liquid`; apply the upload size guard |
 | `npm run check -- screen.html` | Validate and render a screen to `artifacts/check/`; on success write `dist/full.liquid` for upload |
+| `npm run pixel -- art.mjs` | Render a pixel-art drawing module to a 4× preview and a `p-image` tag in `artifacts/pixel/` |
 | `npm run compose -- screen.html` | Wrap a screen into `dist/full.liquid` without checking it |
 | `npm test` | Build, render all examples and stress cases, run rejection and skill-sync checks |
 
@@ -28,9 +29,11 @@ src/
   design/tokens.json          type scale, spacing, rules, fills, limits
   design/weather.json         weather conditions, icons, WMO codes
   screen.mjs                  stylesheet + class list generator, markup policy, compose()
+  pixel.mjs                   1-bit pixel-image drawing and PNG encoding
   contract.liquid             AI-facing contract embedded in the uploaded markup
 scripts/                      build, check, compose, shared Chrome render harness
 examples/screens/             one tested screen per layout pattern
+examples/pixel/               reusable pixel-art drawings (a character in weather outfits)
 tests/design.mjs              examples, stress cases, rejections, skill sync
 docs/                         design system and reconstructed history
 config/plugin.json            non-secret deployment identifiers
@@ -46,7 +49,7 @@ vendor/                       pinned TRMNL framework assets and weather icons
 
 Merge variables are no longer used; each update replaces the markup. Agents without the repository read the markup, replace only the text between `<!-- SCREEN:BEGIN -->` and `<!-- SCREEN:END -->`, and follow the embedded `AGENT_DYNAMIC_UI_CONTRACT/2`. Use real, authorized facts and an honest content time. Included examples are fictional.
 
-Local 800×480 renders differ from device-model proportions, and a server preview doesn't verify the physical screen. Full-screen layout only; mashup sizes aren't implemented. The installed screen is the editorial example (`examples/screens/editorial.html`). No daily content-generation automation is configured.
+Local 800×480 renders differ from device-model proportions, and a server preview doesn't verify the physical screen. Full-screen layout only; mashup sizes aren't implemented. The installed screen is the agenda example (`examples/screens/agenda.html`). No daily content-generation automation is configured.
 
 ## License
 

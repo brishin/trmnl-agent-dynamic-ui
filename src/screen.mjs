@@ -12,6 +12,7 @@ export const css=`/* Screen design system. Generated from src/design/tokens.json
 .dui {position:relative;width:100%;height:100%;padding:${px(tokens.screen.inset_px)};display:flex;flex-direction:column;overflow:hidden;background:${tokens.ink.background};color:${tokens.ink.foreground};font-size:${px(ty.styles.body.size)};line-height:${px(ty.styles.body.line_height)};font-weight:${ty.styles.body.weight};}
 .dui :where(h1,h2,h3,p,ul,ol,li,table,th,td,b,strong,em) {font:inherit;color:inherit;list-style:none;text-align:inherit;}
 .dui :where(b,strong) {font-weight:700;}
+.dui :where(em) {font-style:italic;}
 .dui :where(table) {border-collapse:collapse;width:100%;}
 .dui :where(th,td) {padding:6px 12px 6px 0;vertical-align:baseline;text-align:left;}
 .dui > * {flex:0 1 auto;min-height:0;}
@@ -70,6 +71,9 @@ ${each(tokens.bars.min,(k,v)=>`.dui .s-bar-min-${k} {--minh:${px(v)};}`)}
 .dui .s-bar-fill:is(${dark.map(s=>'.bg--gray-'+s).join(',')}) {color:#fff;text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,0 1px 0 #000,0 -1px 0 #000,1px 0 0 #000,-1px 0 0 #000;}
 .dui .i-icon {display:inline-block;width:1.25em;height:1.25em;object-fit:contain;vertical-align:-.28em;flex:none;}
 ${each(tokens.icons,(k,v)=>`.dui .i-${k} {width:${px(v)};height:${px(v)};vertical-align:middle;}`)}
+/* Pixel images are 1-bit PNGs shown at their own size: never scaled, so each pixel lands on one device pixel. */
+.dui .p-image {display:block;flex:none;object-fit:none;image-rendering:pixelated;}
+.dui .s-inverse .p-image {filter:invert(1);}
 /* Icons are black remote SVGs: invert them on black ground, outlining first so they survive dithered fills. */
 .dui :is(.s-inverse,.s-bar-fill:not([class*="bg--gray-"])) .i-icon {filter:invert(1);}
 .dui .s-bar-fill:is(${dark.map(s=>'.bg--gray-'+s).join(',')}) .i-icon {filter:drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(1px -1px 0 #fff) invert(1);}
@@ -90,6 +94,7 @@ export const policy={
  attributes:['class','alt','src','style','data-updated'],
  style_properties:{'--from':[0,100],'--to':[0,100],'--cols':[1,12],'--span':[1,12]},
  icon_sources:[...new Set(Object.keys(weather.conditions).map(iconUrl))],
+ pixel_images:tokens.pixel_images,
  fill_classes:fills.map(s=>'bg--gray-'+s),
  limits:tokens.limits
 };
@@ -99,7 +104,7 @@ export function contract(){
  const icons=Object.fromEntries(Object.entries(weather.conditions).map(([k,c])=>[k,{file:'wi-'+c.icon+'.svg',wmo:c.wmo}]));
  return read('contract.liquid')
   .replace('@@CLASSES@@',classes.join(' '))
-  .replace('@@POLICY_JSON@@',JSON.stringify({tags:policy.tags,attributes:policy.attributes,style_properties:policy.style_properties,limits:policy.limits}))
+  .replace('@@POLICY_JSON@@',JSON.stringify({tags:policy.tags,attributes:policy.attributes,style_properties:policy.style_properties,pixel_images:policy.pixel_images,limits:policy.limits}))
   .replace('@@ICONS_JSON@@',JSON.stringify({url:weather.icon_url,conditions:icons}))
   .replace('@@TOKENS_JSON@@',JSON.stringify({screen:tokens.screen,typography:tokens.typography,spacing:tokens.spacing.scale,rules:tokens.rules}));
 }

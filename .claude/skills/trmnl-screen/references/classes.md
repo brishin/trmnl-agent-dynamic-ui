@@ -64,6 +64,8 @@ Weights: thin 1px, medium 3px, thick 5px.
 | `t-center`, `t-end` | Text alignment | Centered covers, right-aligned values |
 | `t-nowrap` | No wrapping | Values that must stay on one line (check the width!) |
 
+`<b>`/`<strong>` are bold. `<em>` is italic: use it for tentative or optional items ("maybe" plans) so they recede next to bold confirmed ones, without a "?" or gray text.
+
 ## Figures
 
 Numerals at weight 800, never wrapping. The average digit width is noted so you can check width before rendering.
@@ -86,6 +88,12 @@ Numerals at weight 800, never wrapping. The average digit width is noted so you 
 | `s-badge` | Outlined uppercase tag, 16px bold |
 | `s-badge-filled` | Solid badge (add to `s-badge`) |
 | `s-ring` | Circles short content (a day number); with `s-inverse` it becomes a solid disc |
+
+## Pixel images
+
+| Class | Effect |
+| --- | --- |
+| `p-image` | Required on every pixel image: `<img class="p-image" src="data:image/png;base64,…" alt="">`. Shown at its own size, never scaled; inverts on `s-inverse`. Draw it with `npm run pixel`; see [pixel-art.md](pixel-art.md) |
 
 ## Lists
 

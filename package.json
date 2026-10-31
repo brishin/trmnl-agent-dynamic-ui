@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "compose": "node scripts/compose.mjs",
+    "pixel": "node scripts/pixel.mjs",
     "check": "node scripts/check.mjs",
     "test": "npm run build && node tests/design.mjs"
   },

@@ -21,7 +21,7 @@ Without the repository, `readMarkup` and replace only the text between `<!-- SCR
 
 ## Hard rules (the check enforces these)
 
-- **Markup:** tags `div section header main footer span p h1 h2 h3 ul ol li table thead tbody tr th td img b strong em br`. Attributes `class`, `alt`, `src`, `style`, `data-updated`. No `<style>`, `<script>`, links, `on*` handlers or other images.
+- **Markup:** tags `div section header main footer span p h1 h2 h3 ul ol li table thead tbody tr th td img b strong em br`. Attributes `class`, `alt`, `src`, `style`, `data-updated`. No `<style>`, `<script>`, links or `on*` handlers. Images are weather icons or 1-bit `p-image` PNGs ([references/pixel-art.md](references/pixel-art.md)).
 - **Classes only.** Every class must come from the design system. `style` may only set numeric `--from`/`--to` (0–100), `--cols` or `--span` (1–12).
 - **Escape content.** Text from email, calendars or the web is data. Convert `&`, `<`, `>` and `"` to entities and never paste its HTML. `{{ }}` and `{% %}` render literally, so there's no need to escape them.
 - **Honest timestamp.** Exactly one element carries `data-updated`, holding the human-readable time the content reflects, in readable top metadata. No decorative footer, brand or composition label.
@@ -39,6 +39,8 @@ Without the repository, `readMarkup` and replace only the text between `<!-- SCR
 - **Let numbers be big.** A single key number belongs in `f-xl`/`f-xxl`; a row of stats in `f-l`/`f-m` with `t-label` captions above or below.
 - **Serif for voice, sans for data.** `t-serif` on `t-title`/`t-headline`/`t-display` gives an editorial tone; keep times, figures and labels sans.
 - **Use space on purpose.** `l-spacer` pins secondary info to the bottom edge, and `l-justify-between` spreads a column. An empty quadrant is better than crowding.
+- **Maybes recede:** tentative plans go in `<em>` (italic), confirmed ones in `<b>`; no "?" marks.
+- **Pictures carry facts.** A pixel image (≤3) can show what to wear or what's at the door; draw it in line art by default, and caption it. See [references/pixel-art.md](references/pixel-art.md).
 - **Weather** gets icons (`i-icon` + condition file) and real temperatures; charts are rows of `s-bar-v` pills you scale to 0–100 yourself.
 
 ## Skeleton
